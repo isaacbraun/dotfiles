@@ -5,7 +5,14 @@ TERM = "xterm-256color"
 normal = { family = "Hack Nerd Font Mono", style = "Regular"}
 
 [window]
-padding = { x = 1, y = 1 }
+decorations = "None"
 
 [colors.primary]
 background = "#181723"
+
+[mouse]
+[[hints.enabled]]
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+command = "open"
+hyperlinks = true
+post_processing = true
