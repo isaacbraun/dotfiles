@@ -1,16 +1,20 @@
 # dotfiles
-Personal Config Files for zsh, tmux, etc.
+These are my personal configuration files. They are a continual work in progress and recently reset to be heavily based on [Thorsten Ball's dotfiles](https://github.com/mrnugget/dotfiles/).
+
+## Usage
+All files are edited within the repo, then symlinks are created to them using the Makefile.
+
+- Run one symlink/setup. ZSH for example: `make zsh`
+- Run all symlinks/setup: `make all`
 
 ## Look into these ideas
-- [Thorsten's ZSH](https://github.com/mrnugget/dotfiles/blob/c4624ed521d539856bcf764f04a295bb19093566/zshrc#L152-L179)
-- [Thorsten's Git](https://github.com/mrnugget/dotfiles/blob/c4624ed521d539856bcf764f04a295bb19093566/gitconfig)
-- Customizing tmux
 - [tmux sessionizer](https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer)
 - runs folder
 - learn more bash
 
-## Brain Dump of Tools
+## Tools Configured 
 - FZF: look into how this works
-- ZSH & OhMyZsh
-- Alacritty - but want to use Ghostty
+- ZSH
+- Ghostty
 - Zoxide
+- Tmux
