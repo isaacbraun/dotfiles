@@ -5,13 +5,6 @@ else
   export EDITOR='mvim'
 fi
 
-# Aliases
-alias vim="nvim"
-alias vi="nvim"
-alias venv-a="source .venv/bin/activate"
-
-alias pn="pnpm"
-
 # Zoxide init
 eval "$(zoxide init --cmd cd zsh)"
 
@@ -112,17 +105,6 @@ bindkey -s '^F' "tmux-sessionizer\n"
 # Aliases
 #########
 
-case $OSTYPE in
-  linux*)
-    local aliasfile="${HOME}/.zsh.d/aliases.Linux.sh"
-    [[ -e ${aliasfile} ]] && source ${aliasfile}
-  ;;
-  darwin*)
-    local aliasfile="${HOME}/.zsh.d/aliases.Darwin.sh"
-    [[ -e ${aliasfile} ]] && source ${aliasfile}
-  ;;
-esac
-
 # if type lsd &> /dev/null; then
 #   alias ls=lsd
 # fi
@@ -136,6 +118,14 @@ alias hs='history | grep '
 
 # Use rsync with ssh and show progress
 alias rsyncssh='rsync -Pr --rsh=ssh'
+
+alias vim="nvim"
+alias vi="nvim"
+# Open vim in current directory
+alias vd="nvim ."
+alias venv-a="source .venv/bin/activate"
+
+alias pn="pnpm"
 
 # Edit/Source vim config
 alias ez='vi ~/.zshrc'
