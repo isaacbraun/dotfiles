@@ -1,12 +1,3 @@
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
-
-# Zoxide init
-eval "$(zoxide init --cmd cd zsh)"
 
 ############## 
 # Taken from Thorsten Ball's config: https://github.com/mrnugget/dotfiles/
@@ -18,6 +9,19 @@ typeset -U PATH
 autoload colors; colors;
 # gruvbox yellow, bold
 local dir_info_color="%B%F{#fabd2f}"
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
+
+# Zoxide init
+eval "$(zoxide init --cmd cd zsh)"
+
+## Mise Activate
+eval "$(mise activate zsh)"
 
 ##########
 # HISTORY
@@ -289,9 +293,6 @@ if type fzf &> /dev/null && type rg &> /dev/null; then
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-# Export my personal ~/bin as last one to have highest precedence
-export PATH="$HOME/bin:$PATH"
-
 # pnpm
 export PNPM_HOME="/home/isaac/.local/share/pnpm"
 case ":$PATH:" in
@@ -299,3 +300,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Add .local/bin to path
+export PATH="$HOME/.local/bin:$PATH"
+
+# Export my personal ~/bin as last one to have highest precedence
+export PATH="$HOME/bin:$PATH"
