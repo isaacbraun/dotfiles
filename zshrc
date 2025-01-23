@@ -303,6 +303,13 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# bun completions
+[ -s "/home/isaac/.bun/_bun" ] && source "/home/isaac/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 # Add .local/bin to path
 export PATH="$HOME/.local/bin:$PATH"
 
