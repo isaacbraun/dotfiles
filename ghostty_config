@@ -7,4 +7,5 @@
 theme = GruvboxDarkHard
 font-family = Hack Nerd Font Mono
 font-size = 16
+window-decoration = false
 # link = true - not implemented yet
