@@ -23,4 +23,14 @@ $(HOME)/.config/ghostty/config:
 
 ghostty: $(HOME)/.config/ghostty/config
 
-all: git zsh tmux ghostty 
+# Zen userChrome.css file
+# Find path to default profile folder
+ZEN_PROFILE_DIR := $(shell find /home/isaac/.zen -type d -name "chrome" -o -type d -name "*default*" | head -n 1)
+
+$(ZEN_PROFILE_DIR)/chrome/userChrome.css: zenUserChrome 
+	mkdir -p $(dir $@)
+	ln -sf $(DOTFILE_PATH)/$^ $@
+
+zen: $(ZEN_PROFILE_DIR)/chrome/userChrome.css
+
+all: git zsh tmux ghostty zen
