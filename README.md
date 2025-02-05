@@ -8,7 +8,7 @@ All files are edited within the repo, then symlinks are created to them using th
 - Run all symlinks/setup: `make all`
 
 ## Look into these ideas
-- [tmux sessionizer](https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer)
+- Set up .tmux-sessionizer config files for specific directories
 - runs folder
 - learn more bash
 

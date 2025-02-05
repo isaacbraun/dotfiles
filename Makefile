@@ -7,15 +7,17 @@ $(HOME)/.%: %
 git: $(HOME)/.gitconfig $(HOME)/.githelpers $(HOME)/.gitignore
 
 zsh: $(HOME)/.zshrc
-#  $(HOME)/.zsh.d
 
-$(HOME)/bin/tmux-sessionizer:
-	mkdir -p $(HOME)/bin
-	ln -sf $(DOTFILE_PATH)/bin/tmux-sessionizer $(HOME)/bin/tmux-sessionizer
-	chmod +x $(HOME)/bin/tmux-sessionizer
+# Symlink all scripts
+$(HOME)/scripts: scripts/
+	ln -snf $(DOTFILE_PATH)/$^ $@
+	@echo "Making all scripts executable..."
+	chmod +x $(DOTFILE_PATH)/scripts/*
 
-tmux: $(HOME)/.tmux.conf
-tmux-sessionizer: $(HOME)/bin/tmux-sessionizer
+scripts-folder: $(HOME)/scripts
+
+# tmux config and cheat sheet config files
+tmux: $(HOME)/.tmux.conf $(HOME)/.tmux-cht-languages $(HOME)/.tmux-cht-commands
 
 $(HOME)/.config/ghostty/config:
 	mkdir -p $(HOME)/.config/ghostty
@@ -33,4 +35,4 @@ $(ZEN_PROFILE_DIR)/chrome/userChrome.css: zenUserChrome
 
 zen: $(ZEN_PROFILE_DIR)/chrome/userChrome.css
 
-all: git zsh tmux ghostty zen
+all: git zsh scripts-folder ghostty zen

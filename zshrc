@@ -103,7 +103,7 @@ bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
 # Where should I put you?
-bindkey -s '^F' "tmux-sessionizer\n"
+bindkey -s '^F' "~/scripts/tmux-sessionizer\n"
 
 #########
 # Aliases
