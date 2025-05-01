@@ -17,12 +17,6 @@ else
   export EDITOR='mvim'
 fi
 
-# Zoxide init
-eval "$(zoxide init --cmd cd zsh)"
-
-## Mise Activate
-eval "$(mise activate zsh)"
-
 ##########
 # HISTORY
 ##########
@@ -313,5 +307,14 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Add .local/bin to path
 export PATH="$HOME/.local/bin:$PATH"
 
+# Brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Export my personal ~/bin as last one to have highest precedence
 export PATH="$HOME/bin:$PATH"
+
+# Zoxide init
+eval "$(zoxide init --cmd cd zsh)"
+
+## Mise Activate
+eval "$(mise activate zsh)"
