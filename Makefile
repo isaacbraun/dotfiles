@@ -19,6 +19,7 @@ scripts-folder: $(HOME)/scripts
 # tmux config and cheat sheet config files
 tmux: $(HOME)/.tmux.conf $(HOME)/.tmux-cht-languages $(HOME)/.tmux-cht-commands
 
+# Ghostty mkdir and alias
 $(HOME)/.config/ghostty/config:
 	mkdir -p $(HOME)/.config/ghostty
 	ln -sf $(DOTFILE_PATH)/ghostty_config $(HOME)/.config/ghostty/config

@@ -7,7 +7,9 @@ All files are edited within the repo, then symlinks are created to them using th
 - Run one symlink/setup. ZSH for example: `make zsh`
 - Run all symlinks/setup: `make all`
 
-## Look into these ideas
+## To Do
+- Ensure [ripgrep](https://github.com/BurntSushi/ripgrep) is installed. It is needed for telescope to function properly.
+- Should rg be aliased instead of grep??
 - Set up .tmux-sessionizer config files for specific directories
 - runs folder
 - learn more bash
@@ -18,3 +20,4 @@ All files are edited within the repo, then symlinks are created to them using th
 - Ghostty
 - Zoxide
 - Tmux
+- Alacritty: only for Windows. File needs to be copied.

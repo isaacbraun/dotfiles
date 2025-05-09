@@ -130,7 +130,7 @@ alias ez='vi ~/.zshrc'
 alias sz='source ~/.zshrc'
 
 # git
-alias gst='git status'
+alias gs='git status'
 alias gaa='git add -A'
 alias gc='git commit'
 alias gcm='git checkout main'
@@ -138,6 +138,7 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 # [c]heck [o]ut
 alias co='git checkout'
+alias sw='git switch'
 # [s]witch and [c]reate branch
 alias swc='git switch -c'
 # [f]uzzy check[o]ut
@@ -173,6 +174,9 @@ alias -g .....='../../../..'
 alias got='go test ./...'
 
 alias -g withcolors="| sed '/PASS/s//$(printf "\033[32mPASS\033[0m")/' | sed '/FAIL/s//$(printf "\033[31mFAIL\033[0m")/'"
+
+# PHP/Laravel
+alias ar='php artisan'
 
 ##########
 # FUNCTIONS
@@ -270,6 +274,7 @@ simple_prompt() {
 export KEYTIMEOUT=1
 
 export PATH="$HOME/neovim/bin:$PATH"
+export PATH="/opt/nvim-linux64/bin:$PATH"
 
 if type nvim &> /dev/null; then
   alias vim="nvim"
@@ -318,3 +323,6 @@ eval "$(zoxide init --cmd cd zsh)"
 
 ## Mise Activate
 eval "$(mise activate zsh)"
+
+export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
