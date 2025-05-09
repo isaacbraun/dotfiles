@@ -324,5 +324,12 @@ eval "$(zoxide init --cmd cd zsh)"
 ## Mise Activate
 eval "$(mise activate zsh)"
 
-export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
+  export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+elif [[ "$(uname -s)" == "Linux" ]]; then
+  export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
+  export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+fi
+
+
