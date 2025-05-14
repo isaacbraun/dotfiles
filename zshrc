@@ -312,9 +312,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Add .local/bin to path
 export PATH="$HOME/.local/bin:$PATH"
 
-# Brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
 # Export my personal ~/bin as last one to have highest precedence
 export PATH="$HOME/bin:$PATH"
 
@@ -327,6 +324,9 @@ eval "$(mise activate zsh)"
 if [[ "$(uname -s)" == "Darwin" ]]; then
   export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
   export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
+  # Brew
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 elif [[ "$(uname -s)" == "Linux" ]]; then
   export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
   export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
