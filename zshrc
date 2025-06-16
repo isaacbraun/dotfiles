@@ -149,6 +149,50 @@ fo() {
 po() {
   gh pr list --author "@me" | fzf --header 'checkout PR' | awk '{print $(NF-5)}' | xargs git checkout
 }
+# Use specific esri/personl gh config
+ghe() {
+  GH_CONFIG_DIR=~/.config/gh-esri gh "$@"
+}
+ghp() {
+  GH_CONFIG_DIR=~/.config/gh-personal gh "$@"
+}
+
+function eclone() {
+  local repo_path="$1" # e.g., "owner/repo-name"
+  local target_email="ibraun@esri.com"
+  # local target_email="$2" # e.g., "email@example.com"
+
+  # if [ -z "$repo_path" ] || [ -z "$target_email" ]; then
+  if [ -z "$repo_path" ]; then
+    echo "Usage: elcone <owner>/<repository>"
+    return 1
+  fi
+
+  echo "Cloning $repo_path..."
+  ghe repo clone "$repo_path"
+
+  # Extract the repository name from the path for changing directory
+  # This handles cases like "owner/repo" and "owner/repo.git"
+  local repo_name=$(basename "$repo_path" .git)
+
+  if [ ! -d "$repo_name" ]; then
+    echo "Error: Repository directory '$repo_name' not found after cloning."
+    return 1
+  fi
+
+  echo "Changing directory to $repo_name..."
+  cd "$repo_name" || return 1 # Exit if cd fails
+
+  echo "Setting local Git email to $target_email..."
+  git config user.email "$target_email"
+
+  echo "Done! Cloned $repo_path and set local email to $target_email."
+  echo "You are now in: $(pwd)"
+}
+
+# alias eclone='ghe repo clone'
+alias pclone='ghp repo clone'
+
 alias up='git push'
 alias upf='git push --force'
 alias pu='git pull'
@@ -159,7 +203,8 @@ alias lr='git l -30'
 alias cdr='cd $(git rev-parse --show-toplevel)' # cd to git Root
 alias hs='git rev-parse --short HEAD'
 alias hm='git log --format=%B -n 1 HEAD'
-alias pr='gh pr create'
+alias pr='ghp pr create'
+alias pre='ghe pr create'
 
 # tmux
 alias tma='tmux attach -t'
@@ -313,6 +358,19 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Add .local/bin to path
 export PATH="$HOME/.local/bin:$PATH"
 
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
+  export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
+  # Brew
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  # Add homewbrew/bin to path
+  export PATH="$HOME/homebrew/bin:$PATH"
+elif [[ "$(uname -s)" == "Linux" ]]; then
+  export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
+  export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+fi
+
 # Export my personal ~/bin as last one to have highest precedence
 export PATH="$HOME/bin:$PATH"
 
@@ -321,16 +379,3 @@ eval "$(zoxide init --cmd cd zsh)"
 
 ## Mise Activate
 eval "$(mise activate zsh)"
-
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-
-  # Brew
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ "$(uname -s)" == "Linux" ]]; then
-  export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-fi
-
-
