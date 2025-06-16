@@ -36,4 +36,4 @@ $(ZEN_PROFILE_DIR)/chrome/userChrome.css: zenUserChrome
 
 zen: $(ZEN_PROFILE_DIR)/chrome/userChrome.css
 
-all: git zsh scripts-folder ghostty
+all: git zsh scripts-folder tmux ghostty
