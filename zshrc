@@ -224,6 +224,9 @@ alias -g withcolors="| sed '/PASS/s//$(printf "\033[32mPASS\033[0m")/' | sed '/F
 # PHP/Laravel
 alias ar='php artisan'
 
+# OpenCode
+alias oc='opencode'
+
 ##########
 # FUNCTIONS
 ##########
