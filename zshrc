@@ -369,6 +369,8 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
   # Add homewbrew/bin to path
   export PATH="$HOME/homebrew/bin:$PATH"
+  # Add Go
+  export PATH="/usr/local/go/bin/go/:$PATH"
 elif [[ "$(uname -s)" == "Linux" ]]; then
   export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
   export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
