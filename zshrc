@@ -159,24 +159,28 @@ ghp() {
 
 function eclone() {
   local repo_path="$1" # e.g., "owner/repo-name"
+  local custom_dir="$2" # e.g., "/path/to/directory"
   local target_email="ibraun@esri.com"
-  # local target_email="$2" # e.g., "email@example.com"
 
-  # if [ -z "$repo_path" ] || [ -z "$target_email" ]; then
   if [ -z "$repo_path" ]; then
-    echo "Usage: elcone <owner>/<repository>"
+    echo "Usage: elcone <owner>/<repository> [custom_directory]"
     return 1
   fi
 
   echo "Cloning $repo_path..."
-  ghe repo clone "$repo_path"
+  ghe repo clone "$repo_path" "$custom_dir"
 
   # Extract the repository name from the path for changing directory
   # This handles cases like "owner/repo" and "owner/repo.git"
   local repo_name=$(basename "$repo_path" .git)
 
+  # If a custom directory is provided, use it instead of repo_name
+  if [ -n "$custom_dir" ]; then
+    repo_name="$custom_dir"
+  fi
+  # Change to the cloned repository directory
   if [ ! -d "$repo_name" ]; then
-    echo "Error: Repository directory '$repo_name' not found after cloning."
+    echo "Error: Directory $repo_name not found after cloning."
     return 1
   fi
 
@@ -192,6 +196,9 @@ function eclone() {
 
 # alias eclone='ghe repo clone'
 alias pclone='ghp repo clone'
+
+# GH Cli FZF aliases
+alias me='ghp fzf issue --assignee @me --state open'
 
 alias up='git push'
 alias upf='git push --force'
@@ -361,6 +368,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Add .local/bin to path
 export PATH="$HOME/.local/bin:$PATH"
 
+# Add Mason bin to path
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+
 if [[ "$(uname -s)" == "Darwin" ]]; then
   export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
   export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
@@ -398,3 +408,7 @@ elif [[ "$(uname -s)" == "Linux" ]]; then
   export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
   export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 fi
+
+# opencode
+export PATH=/Users/isa14596/.opencode/bin:$PATH
+alias oc="opencode"
