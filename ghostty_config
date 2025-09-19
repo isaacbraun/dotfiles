@@ -4,7 +4,7 @@
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
-theme = GruvboxDarkHard
+theme = Gruvbox Dark Hard
 font-family = Hack Nerd Font Mono
 font-size = 16
 window-decoration = false
