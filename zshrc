@@ -197,6 +197,139 @@ function eclone() {
 # alias eclone='ghe repo clone'
 alias pclone='ghp repo clone'
 
+# Function to add/remove git worktrees.
+# Usage:
+#  gwt add <path> <branch>                     - Add worktree for existing or new branch (creates if missing)
+#  gwt add <path> -b <new-branch> [start]      - Add worktree creating new branch (optional start-point)
+#  gwt remove [-f|--force] <path>              - Remove worktree (kills tmux session if exists; -f to force)
+#  gwt list                                    - List existing worktrees
+function gwt() {
+  local action="$1"
+  shift || true
+  case "$action" in
+    add)
+      # Support forms:
+      # gwt add <path> <existing-branch>
+      # gwt add <path> -b <new-branch> [start-point]
+      local create_branch=""
+      local branch=""
+      local wt_path=""
+      local start_point=""
+
+      wt_path="$1"; shift 1 || true
+      if [ -z "$wt_path" ]; then
+        echo "Usage: gwt add <path> <branch>"
+        echo "       gwt add <path> -b <new-branch> [start-point]"
+        return 1
+      fi
+
+      if [ "$1" = "-b" ]; then
+        create_branch=1
+        branch="$2"; shift 2
+        start_point="$1"
+      else
+        branch="$1"; shift 1
+      fi
+
+      if [ -z "$branch" ]; then
+        echo "Usage: gwt add <path> <branch>"
+        echo "       gwt add <path> -b <new-branch> [start-point]"
+        return 1
+      fi
+
+      if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "Not inside a git repository."
+        return 1
+      fi
+      if [ -e "$wt_path" ]; then
+        echo "Error: path '$wt_path' already exists."
+        return 1
+      fi
+
+      if [ -n "$create_branch" ]; then
+        if [ -n "$start_point" ]; then
+          echo "Creating new branch '$branch' from '$start_point' at '$wt_path'"
+          git worktree add -b "$branch" "$wt_path" "$start_point" || return $?
+        else
+          echo "Creating new branch '$branch' from current HEAD at '$wt_path'"
+          git worktree add -b "$branch" "$wt_path" || return $?
+        fi
+      else
+        if git show-ref --verify --quiet "refs/heads/$branch"; then
+          echo "Adding worktree for existing branch '$branch' at '$wt_path'"
+          git worktree add "$wt_path" "$branch" || return $?
+        else
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo "Creating worktree from remote branch 'origin/$branch' at '$wt_path'"
+            git worktree add -b "$branch" "$wt_path" "origin/$branch" || return $?
+          else
+            echo "Creating new branch '$branch' from current HEAD at '$wt_path'"
+            git worktree add -b "$branch" "$wt_path" || return $?
+          fi
+        fi
+      fi
+      ;;
+    list)
+      if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "Not inside a git repository."
+        return 1
+      fi
+      # Format: path | HEAD ref | branch
+      git worktree list --porcelain | awk '
+        /^worktree /{wt=$2}
+        /^HEAD /{head=$2}
+        /^branch /{sub(/^refs\/heads\//, "", $2); branch=$2; printf("%s\t%s\t%s\n", wt, head, branch); wt=head=branch=""}
+      '
+      ;;
+    remove)
+      local wt_path="$1"
+      if [ -z "$wt_path" ]; then
+        echo "Usage: gwt remove [-f] <path>"
+        return 1
+      fi
+      if [ ! -d "$wt_path" ]; then
+        echo "Worktree path '$wt_path' does not exist."
+        return 1
+      fi
+      local session
+      session=$(basename "$wt_path")
+      if command -v tmux >/dev/null 2>&1; then
+        if tmux has-session -t "$session" 2>/dev/null; then
+          echo "Killing tmux session '$session'"
+          tmux kill-session -t "$session"
+        fi
+      fi
+      echo "Removing worktree at '$wt_path'"
+      local force_flag
+      if [ "$wt_path" = "-f" ] || [ "$wt_path" = "--force" ]; then
+        force_flag=1
+        wt_path="$2"
+      else
+        if [ "$2" = "-f" ] || [ "$2" = "--force" ]; then
+          force_flag=1
+        fi
+      fi
+      if ! git worktree remove "$wt_path"; then
+        if [ -n "$force_flag" ]; then
+          echo "Worktree not clean; forcing removal"
+          git worktree remove --force "$wt_path" || return $?
+        else
+          echo "Worktree not clean. Use -f to force removal."
+          return 1
+        fi
+      fi
+      ;;
+    *)
+      echo "Usage:"
+      echo "  gwt add <path> <branch>"
+      echo "  gwt add <path> -b <new-branch> [start-point]"
+      echo "  gwt list"
+      echo "  gwt remove [-f|--force] <path>"
+      return 1
+      ;;
+  esac
+}
+
 # GH Cli FZF aliases
 alias me='ghp fzf issue --assignee @me --state open'
 
