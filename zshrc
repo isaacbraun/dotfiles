@@ -103,13 +103,7 @@ bindkey -s '^F' "~/scripts/tmux-sessionizer\n"
 # Aliases
 #########
 
-# if type lsd &> /dev/null; then
-#   alias ls=lsd
-# fi
-alias ls="ls --color=auto"
-alias lsa='ls -a --color=auto'
-alias lls='ls -lh --sort=size --reverse'
-alias llt='ls -lrt'
+alias ls='eza --icons --long --git --no-user'
 
 alias history='history 1'
 alias hs='history | grep '

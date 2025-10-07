@@ -19,5 +19,6 @@ All files are edited within the repo, then symlinks are created to them using th
 - ZSH
 - Ghostty
 - Zoxide
+- eza
 - Tmux
 - Alacritty: only for Windows. File needs to be copied.
