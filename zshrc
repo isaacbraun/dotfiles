@@ -104,6 +104,7 @@ bindkey -s '^F' "~/scripts/tmux-sessionizer\n"
 #########
 
 alias ls='eza --icons --long --git --no-user'
+alias lsa='eza --icons --long --git --no-user -a'
 
 alias history='history 1'
 alias hs='history | grep '
