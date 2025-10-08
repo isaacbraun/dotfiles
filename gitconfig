@@ -2,6 +2,12 @@
   name = Isaac Braun
   email = isaacbraun2000@gmail.com
 
+# Conditional identities
+[includeIf "gitdir:~/dev/public/"]
+    path = ~/.gitconfig-public
+[includeIf "gitdir:~/dev/enterprise/"]
+    path = ~/.gitconfig-enterprise
+
 # Inital setup taken from Thorsten Ball's Config: https://github.com/mrnugget/dotfiles/blob/c4624ed521d539856bcf764f04a295bb19093566/gitconfig
 [alias]
   br = branch

@@ -1,0 +1,14 @@
+[user]
+    email = ibraun@esri.com
+
+# Enterprise Git configuration fragment.
+# This file is symlinked to ~/.gitconfig-enterprise by the Makefile.
+# Add enterprise-specific settings (e.g., enforced signing) below.
+
+# Example: enforce signing for enterprise commits
+# [commit]
+#     gpgsign = true
+# [gpg]
+#     program = gpg
+# [user]
+#     signingkey = ~/.ssh/id_ed25519_enterprise.pub
