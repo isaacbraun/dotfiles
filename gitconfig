@@ -3,8 +3,6 @@
   email = isaacbraun2000@gmail.com
 
 # Conditional identities
-[includeIf "gitdir:~/dev/public/"]
-    path = ~/.gitconfig-public
 [includeIf "gitdir:~/dev/enterprise/"]
     path = ~/.gitconfig-enterprise
 
