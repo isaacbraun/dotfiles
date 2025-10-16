@@ -1,5 +1,5 @@
 
-############## 
+##############
 # Taken from Thorsten Ball's config: https://github.com/mrnugget/dotfiles/
 ##############
 # BASIC SETUP
@@ -210,6 +210,12 @@ function gwt() {
           if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
             echo "Creating worktree from remote branch 'origin/$branch' at '$wt_path'"
             git worktree add -b "$branch" "$wt_path" "origin/$branch" || return $?
+            # Ensure upstream tracking is set (git worktree add does not set tracking automatically)
+            if ! git -C "$wt_path" rev-parse --abbrev-ref --symbolic-full-name '@{u}' >/dev/null 2>&1; then
+              if git -C "$wt_path" branch --set-upstream-to="origin/$branch" "$branch" >/dev/null 2>&1; then
+                echo "Set upstream: $branch -> origin/$branch"
+              fi
+            fi
           else
             echo "Creating new branch '$branch' from current HEAD at '$wt_path'"
             git worktree add -b "$branch" "$wt_path" || return $?
@@ -346,15 +352,6 @@ spinner() {
 #   local route="s3.thorstenball.com/${1}"
 #   aws s3 cp ${1} s3://${route}
 #   echo http://${route} | pbcopy
-# }
-
-# Open PR on GitHub
-# pr() {
-#   if type gh &> /dev/null; then
-#     gh pr view -w
-#   else
-#     echo "gh is not installed"
-#   fi
 # }
 
 #########
