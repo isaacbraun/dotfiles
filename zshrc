@@ -116,6 +116,8 @@ alias vim="nvim"
 alias vi="nvim"
 # Open vim in current directory
 alias vd="nvim ."
+# Open zed in current directory
+alias zd="zed ."
 alias venv-a="source .venv/bin/activate"
 
 alias pn="pnpm"
