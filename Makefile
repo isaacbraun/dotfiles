@@ -26,6 +26,17 @@ $(HOME)/.config/ghostty/config:
 
 ghostty: $(HOME)/.config/ghostty/config
 
+# Zed settings files
+$(HOME)/.config/zed/settings.json: zed_settings.json
+	mkdir -p $(HOME)/.config/zed
+	ln -sf $(DOTFILE_PATH)/$^ $@
+
+$(HOME)/.config/zed/keymap.json: zed_keymap.json
+	mkdir -p $(HOME)/.config/zed
+	ln -sf $(DOTFILE_PATH)/$^ $@
+
+zed: $(HOME)/.config/zed/settings.json $(HOME)/.config/zed/keymap.json
+
 # Zen userChrome.css file
 # Find path to default profile folder
 ZEN_PROFILE_DIR := $(shell find /home/isaac/.zen -type d -name "chrome" -o -type d -name "*default*" | head -n 1)
@@ -36,4 +47,4 @@ $(ZEN_PROFILE_DIR)/chrome/userChrome.css: zenUserChrome
 
 zen: $(ZEN_PROFILE_DIR)/chrome/userChrome.css
 
-all: git zsh scripts-folder tmux ghostty
+all: git zsh scripts-folder tmux ghostty zed

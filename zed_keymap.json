@@ -1,0 +1,241 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "bindings": {
+      "ctrl-e": "tab_switcher::ToggleAll",
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-shift-u z z"],
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-shift-d z z"]
+    }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      "space f": "editor::Format"
+    }
+  },
+  {
+    "context": "(Editor && edit_prediction)",
+    "bindings": {
+      "tab": null
+    }
+  },
+  {
+    "context": "Picker > Editor",
+    "bindings": {
+      "ctrl-y": "picker::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "Picker > Editor",
+    "bindings": {
+      "tab": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-a f": [
+        "projects::OpenRecent",
+        {
+          "create_new_window": false
+        }
+      ]
+    }
+  },
+  {
+    "context": "((vim_mode == helix_normal || vim_mode == helix_select) && !menu)",
+    "bindings": {
+      "space f": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-1": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-2": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-3": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-4": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-6": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-5": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-7": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-8": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-9": null
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-1": ["pane::ActivateItem", 0]
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-2": ["pane::ActivateItem", 1]
+    }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      "space h": ["pane::ActivateItem", 0]
+    }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      "space j": ["pane::ActivateItem", 1]
+    }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      "space k": ["pane::ActivateItem", 2]
+    }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      "space l": ["pane::ActivateItem", 3]
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-shift-g": "git_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "vim_mode == literal",
+    "bindings": {
+      "ctrl-f": null
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "ctrl-f": null
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-f": null
+    }
+  },
+  {
+    "context": "(Editor && edit_prediction_conflict)",
+    "bindings": {
+      "alt-tab": null
+    }
+  },
+  {
+    "context": "(Editor && edit_prediction)",
+    "bindings": {
+      "alt-tab": null
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "shift-j": "editor::MoveLineDown",
+      "shift-k": "editor::MoveLineUp"
+    }
+  },
+  {
+    "context": "((os != macos && Editor) && edit_prediction_conflict)",
+    "bindings": {
+      "alt-l": null
+    }
+  },
+  {
+    "context": "(Editor && edit_prediction)",
+    "bindings": {
+      "ctrl-f": "editor::AcceptEditPrediction"
+    }
+  },
+  {
+    "context": "(Editor && showing_completions)",
+    "bindings": {
+      "ctrl-y": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "Workspace || VimControl",
+    "bindings": {
+      "ctrl-t": "terminal_panel::Toggle"
+    }
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "ctrl-g p": "git::Push"
+    }
+  },
+  {
+    "context": "(!Editor && !Terminal)",
+    "bindings": {
+      "g /": "pane::DeploySearch"
+    }
+  },
+  {
+    "context": "(!Editor && !Terminal)",
+    "bindings": {
+      "space p s": "pane::DeploySearch"
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "g /": "pane::DeploySearch",
+      "space p s": "pane::DeploySearch",
+      "ctrl-shift-u": "vim::ScrollUp",
+      "ctrl-shift-d": "vim::ScrollDown"
+    }
+  }
+]
