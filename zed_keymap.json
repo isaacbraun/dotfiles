@@ -22,7 +22,7 @@
   {
     "context": "(Editor && edit_prediction)",
     "bindings": {
-      "tab": null
+      "tab": "editor::Tab"
     }
   },
   {
@@ -34,7 +34,7 @@
   {
     "context": "Picker > Editor",
     "bindings": {
-      "tab": null
+      "tab": "editor::Tab"
     }
   },
   {
@@ -171,7 +171,8 @@
   {
     "context": "(Editor && edit_prediction_conflict)",
     "bindings": {
-      "alt-tab": null
+      "alt-tab": null,
+      "ctrl-f": "editor::AcceptEditPrediction"
     }
   },
   {
@@ -236,6 +237,12 @@
       "space p s": "pane::DeploySearch",
       "ctrl-shift-u": "vim::ScrollUp",
       "ctrl-shift-d": "vim::ScrollDown"
+    }
+  },
+  {
+    "context": "(Editor && showing_completions)",
+    "bindings": {
+      "enter": null
     }
   }
 ]
