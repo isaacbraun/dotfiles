@@ -172,7 +172,7 @@
     "context": "(Editor && edit_prediction_conflict)",
     "bindings": {
       "alt-tab": null,
-      "ctrl-f": "editor::AcceptEditPrediction"
+      "ctrl-alt-f": "editor::AcceptEditPrediction"
     }
   },
   {
