@@ -250,5 +250,11 @@
     "bindings": {
       "shift-enter": null
     }
+  },
+  {
+    "context": "ContextStrip",
+    "bindings": {
+      "enter": null
+    }
   }
 ]
