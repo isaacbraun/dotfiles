@@ -7,6 +7,21 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "debugger": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "project_panel": {
+    "dock": "right"
+  },
   "terminal": {
     "dock": "right"
   },
@@ -69,8 +84,20 @@
     "light": "Gruvbox Light",
     "dark": "Gruvbox Dark Soft"
   },
-  "file_types": {
-    "MDX": ["*.mdx"]
+  "languages": {
+    "PHP": {
+      "language_servers": ["phpactor", "!intelephense", "..."],
+      "formatter": {
+        "external": {
+          "command": "bunx",
+          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    }
   },
-  "languages": {}
+  "file_types": {
+    "MDX": ["*.mdx"],
+    "PHP": ["*.php"],
+    "Blade": ["*blade.php"]
+  }
 }

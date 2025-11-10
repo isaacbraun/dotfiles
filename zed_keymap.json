@@ -244,5 +244,11 @@
     "bindings": {
       "enter": null
     }
+  },
+  {
+    "context": "(Editor && showing_completions)",
+    "bindings": {
+      "shift-enter": null
+    }
   }
 ]
