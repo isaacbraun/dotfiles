@@ -7,6 +7,16 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "colorize_brackets": true,
+  "agent_servers": {
+    "opencode": {
+      "type": "extension",
+      "default_model": "github-copilot/gpt-5"
+    }
+  },
+  "use_autoclose": false,
+  "use_auto_surround": true,
+  "show_signature_help_after_edits": true,
   "debugger": {
     "dock": "right"
   },
@@ -20,6 +30,7 @@
     "dock": "right"
   },
   "project_panel": {
+    "default_width": 300.0,
     "dock": "right"
   },
   "terminal": {
@@ -36,7 +47,7 @@
     "file_icons": false,
     "git_status": true
   },
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   "diagnostics": {
     "inline": {
       "enabled": true
@@ -82,7 +93,7 @@
   "theme": {
     "mode": "dark",
     "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark Soft"
+    "dark": "Gruvbox Dark Hard"
   },
   "languages": {
     "PHP": {
