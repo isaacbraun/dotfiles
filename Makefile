@@ -26,6 +26,14 @@ $(HOME)/.config/ghostty/config:
 
 ghostty: $(HOME)/.config/ghostty/config
 
+# Obsidian Vim.rc file
+# ESRI
+$(HOME)/notes/.obsidian.vimrc: obsidian.vimrc
+	ln -sf $(DOTFILE_PATH)/$^ $@
+# Cleveland
+
+obsidian: $(HOME)/notes/.obsidian.vimrc
+
 # Zed settings files
 $(HOME)/.config/zed/settings.json: zed_settings.json
 	mkdir -p $(HOME)/.config/zed
