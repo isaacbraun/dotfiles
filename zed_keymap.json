@@ -298,5 +298,17 @@
     "bindings": {
       "space shift-l": "pane::SwapItemRight"
     }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      "n": "search::SelectNextMatch"
+    }
+  },
+  {
+    "context": "VimControl",
+    "bindings": {
+      "shift-n": "search::SelectPreviousMatch"
+    }
   }
 ]
