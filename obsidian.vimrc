@@ -44,7 +44,7 @@ vnoremap k k
 " vnoremap gk k
 
 " Yank to system clipboard
-set clipboard=unnamed
+" set clipboard=unnamed
 set tabstop=4
 
 " [z]pelling [l]ist (emulates `z=`)
