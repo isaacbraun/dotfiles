@@ -27,12 +27,17 @@ $(HOME)/.config/ghostty/config:
 ghostty: $(HOME)/.config/ghostty/config
 
 # Obsidian Vim.rc file
-# ESRI
-$(HOME)/notes/.obsidian.vimrc: obsidian.vimrc
-	ln -sf $(DOTFILE_PATH)/$^ $@
-# Cleveland
-
-obsidian: $(HOME)/notes/.obsidian.vimrc
+# Conditionally link to /notes or ~/obsidian/bauen
+obsidian:
+	@if [ -d "$(HOME)/notes" ]; then \
+		mkdir -p "$(HOME)/notes"; \
+		ln -sf "$(DOTFILE_PATH)/obsidian.vimrc" "$(HOME)/notes/.obsidian.vimrc"; \
+		echo "Linked Obsidian vimrc to $(HOME)/notes/.obsidian.vimrc"; \
+	else \
+		mkdir -p "$(HOME)/obsidian/bauen"; \
+		ln -sf "$(DOTFILE_PATH)/obsidian.vimrc" "$(HOME)/obsidian/bauen/.obsidian.vimrc"; \
+		echo "Linked Obsidian vimrc to $(HOME)/obsidian/bauen/.obsidian.vimrc"; \
+	fi
 
 # Zed settings files
 $(HOME)/.config/zed/settings.json: zed_settings.json
