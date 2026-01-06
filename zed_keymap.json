@@ -310,5 +310,34 @@
     "bindings": {
       "shift-n": "search::SelectPreviousMatch"
     }
+  },
+  {
+    "bindings": {
+      "cmd-o": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-o": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-p": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-s": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "((vim_mode == helix_normal || vim_mode == helix_select) && !menu)",
+    "bindings": {
+      "alt-s": null
+    }
   }
 ]
