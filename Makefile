@@ -54,7 +54,7 @@ zed: $(HOME)/.config/zed/settings.json $(HOME)/.config/zed/keymap.json
 # Find path to default profile folder
 ZEN_PROFILE_DIR := $(shell find /home/isaac/.zen -type d -name "chrome" -o -type d -name "*default*" | head -n 1)
 
-$(ZEN_PROFILE_DIR)/chrome/userChrome.css: zenUserChrome 
+$(ZEN_PROFILE_DIR)/chrome/userChrome.css: zenUserChrome
 	mkdir -p $(dir $@)
 	ln -sf $(DOTFILE_PATH)/$^ $@
 
