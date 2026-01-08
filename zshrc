@@ -286,6 +286,9 @@ function gwt() {
   esac
 }
 
+# lazygit alias
+alias lg='lazygit'
+
 # GH Cli FZF aliases
 alias me='gh fzf issue --assignee @me --state open'
 alias pu='git pull'

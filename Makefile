@@ -60,4 +60,19 @@ $(ZEN_PROFILE_DIR)/chrome/userChrome.css: zenUserChrome
 
 zen: $(ZEN_PROFILE_DIR)/chrome/userChrome.css
 
-all: git zsh scripts-folder tmux ghostty zed
+# Lazygit config symlinks
+# Linux: ~/.config/lazygit/config.yml
+# macOS: ~/Library/Application\ Support/lazygit/config.yml
+
+$(HOME)/.config/lazygit/config.yml: lazygit.yml
+	mkdir -p "$(dir $@)"
+	ln -sf "$(DOTFILE_PATH)/$^" "$@"
+
+$(HOME)/Library/Application\ Support/lazygit/config.yml: lazygit.yml
+	mkdir -p "$(dir $@)"
+	ln -sf "$(DOTFILE_PATH)/$^" "$@"
+
+lazygit-linux: $(HOME)/.config/lazygit/config.yml
+lazygit-mac: $(HOME)/Library/Application\ Support/lazygit/config.yml
+
+all: git zsh scripts-folder tmux ghostty zed lazygit-mac
