@@ -32,8 +32,9 @@
 
   # Taken from here: https://aaronbonner.io/post/80766268890/git-alias-to-simplify-setting-upstream-branch
   sup = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"
-  excludesfile = ~/.gitignore
+
 [core]
+  excludesfile = ~/.gitignore
 
 [color]
   diff = auto
