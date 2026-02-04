@@ -7,6 +7,14 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ensure_final_newline_on_save": true,
+  "remove_trailing_whitespace_on_save": true,
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "sticky_scroll": {
+    "enabled": true
+  },
   "session": {
     "trust_all_worktrees": true
   },
@@ -67,9 +75,6 @@
   "telemetry": {
     "diagnostics": false,
     "metrics": false
-  },
-  "features": {
-    "edit_prediction_provider": "copilot"
   },
   "vim_mode": true,
   "vim": {
