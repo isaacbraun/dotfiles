@@ -4,8 +4,16 @@
 # Additionally, each config option is also explained in detail
 # on Ghostty's website, at https://ghostty.org/docs/config.
 
-theme = Gruvbox Dark Hard
-font-family = Hack Nerd Font Mono
-font-size = 16
+font-size = 20
+font-family = JetBrains Mono
+font-family-bold = JetBrains Mono Bold
+font-family-italic = JetBrains Mono Italic
+font-family-bold-italic = JetBrains Mono Bold Italic
+font-thicken = true
 window-decoration = false
-# link = true - not implemented yet
+# link = true - cannot currently be set
+link-url = true
+term = xterm-256color
+window-colorspace = display-p3
+theme = Gruvbox Dark Hard
+adjust-cell-width = -4%

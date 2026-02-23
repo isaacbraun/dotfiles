@@ -97,7 +97,7 @@
     "show_nav_history_buttons": false,
     "show": true
   },
-  "buffer_font_family": "Hack Nerd Font Mono",
+  "buffer_font_family": "JetBrains Mono",
   "theme": {
     "mode": "dark",
     "light": "Gruvbox Light",
