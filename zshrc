@@ -489,3 +489,6 @@ fi
 # opencode
 export PATH=/Users/isa14596/.opencode/bin:$PATH
 alias oc="opencode"
+
+# opencode
+export PATH=/Users/isaac/.opencode/bin:$PATH
