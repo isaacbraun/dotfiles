@@ -480,15 +480,13 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 
   # opencode
+  export PATH=/Users/isa14596/.opencode/bin:$PATH
   export PATH=/Users/isaac/.opencode/bin:$PATH
 elif [[ "$(uname -s)" == "Linux" ]]; then
   export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
   export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 fi
 
-# opencode
-export PATH=/Users/isa14596/.opencode/bin:$PATH
 alias oc="opencode"
-
-# opencode
-export PATH=/Users/isaac/.opencode/bin:$PATH
+export PATH="/Users/isa14596/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/Users/isa14596/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
