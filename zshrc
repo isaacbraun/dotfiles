@@ -130,14 +130,13 @@ alias sz='source ~/.zshrc'
 alias gs='git status'
 alias gaa='git add -A'
 alias gc='git commit'
+alias gcm='git commit -m'
 alias gcm='git checkout main'
 alias gd='git diff'
 alias gdc='git diff --cached'
-# [c]heck [o]ut
-alias co='git checkout'
-alias sw='git switch'
+alias gsw='git switch'
 # [s]witch and [c]reate branch
-alias swc='git switch -c'
+alias gswc='git switch -c'
 # [f]uzzy check[o]ut
 fo() {
   git branch --no-color --sort=-committerdate --format='%(refname:short)' | fzf --header 'git checkout' | xargs git checkout
@@ -291,7 +290,8 @@ alias lg='lazygit'
 
 # GH Cli FZF aliases
 alias me='gh fzf issue --assignee @me --state open'
-alias pu='git pull'
+alias gpu='git pull'
+alias gup='git push'
 alias fe='git fetch'
 alias lr='git l -30'
 alias cdr='cd $(git rev-parse --show-toplevel)' # cd to git Root
