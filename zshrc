@@ -489,3 +489,6 @@ fi
 alias oc="opencode"
 export PATH="/Users/isa14596/.config/herd-lite/bin:$PATH"
 export PHP_INI_SCAN_DIR="/Users/isa14596/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
+# opencode
+export PATH=/Users/isaac/.opencode/bin:$PATH

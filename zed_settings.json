@@ -8,82 +8,82 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "inlay_hints": {
-    "enabled": true
+    "enabled": true,
   },
   "ensure_final_newline_on_save": true,
   "remove_trailing_whitespace_on_save": true,
   "edit_predictions": {
-    "provider": "copilot"
+    "provider": "copilot",
   },
   "sticky_scroll": {
-    "enabled": true
+    "enabled": true,
   },
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "colorize_brackets": true,
   "agent_servers": {
     "opencode": {
       "type": "extension",
-      "default_model": "github-copilot/gpt-5"
-    }
+      "default_model": "github-copilot/gpt-5",
+    },
   },
   "use_autoclose": false,
   "use_auto_surround": true,
   "show_signature_help_after_edits": true,
   "debugger": {
-    "dock": "right"
+    "dock": "right",
   },
   "collaboration_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "outline_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "git_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "project_panel": {
     "default_width": 300.0,
-    "dock": "right"
+    "dock": "right",
   },
   "terminal": {
-    "dock": "right"
+    "dock": "right",
   },
   "when_closing_with_no_tabs": "keep_window_open",
   "file_finder": {
-    "modal_max_width": "large"
+    "modal_max_width": "large",
   },
   "vertical_scroll_margin": 0.0,
   "tabs": {
     "close_position": "left",
     "show_close_button": "hover",
     "file_icons": false,
-    "git_status": true
+    "git_status": true,
   },
   "relative_line_numbers": "enabled",
   "diagnostics": {
     "inline": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "agent": {
     "default_profile": "ask",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5"
+      "model": "gpt-5",
     },
-    "use_modifier_to_send": true
+    "use_modifier_to_send": true,
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "vim_mode": true,
   "vim": {
     "default_mode": "normal",
     "toggle_relative_line_numbers": true,
-    "use_system_clipboard": "never"
+    "use_system_clipboard": "never",
   },
   "ui_font_size": 16,
   "buffer_font_size": 18,
@@ -94,32 +94,154 @@
   "command_aliases": {
     "W": "w",
     "Wq": "wq",
-    "Q": "q"
+    "Q": "q",
   },
   "tab_bar": {
     "show_nav_history_buttons": false,
-    "show": true
+    "show": true,
   },
   "buffer_font_family": "JetBrains Mono",
   "theme": {
-    "mode": "dark",
-    "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark Hard"
+    "mode": "light",
+    "light": "macOS Classic Light",
+    "dark": "Gruvbox Dark Hard",
+  },
+  // "languages": {
+  //   "PHP": {
+  //     "language_servers": ["!phpactor", "intelephense", "..."],
+  //     "formatter": {
+  //       "external": {
+  //         "command": "bunx",
+  //         "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
+  //       }
+  //     }
+  //   }
+  // },
+  "file_types": {
+    "MDX": ["*.mdx"],
+    // "PHP": ["*.php"],
+    "Blade": ["*blade.php"],
   },
   "languages": {
     "PHP": {
-      "language_servers": ["phpactor", "!intelephense", "..."],
+      "tab_size": 4,
+      "hard_tabs": false,
       "formatter": {
         "external": {
-          "command": "bunx",
-          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
-        }
-      }
-    }
+          "command": "bash",
+          "arguments": [
+            "-c",
+            "cat > {buffer_path} && ./vendor/bin/pint --quiet {buffer_path} && cat {buffer_path}",
+          ],
+        },
+      },
+      "language_servers": ["!phpactor", "intelephense", "..."],
+    },
+    "Blade": {
+      "tab_size": 4,
+      "hard_tabs": false,
+      "language_servers": ["!phpactor", "intelephense", "..."],
+    },
+    "JavaScript": {
+      "tab_size": 2,
+      "format_on_save": "on",
+    },
+    "TypeScript": {
+      "tab_size": 2,
+      "format_on_save": "on",
+    },
+    "Vue": {
+      "tab_size": 2,
+      "format_on_save": "on",
+    },
+    "CSS": {
+      "tab_size": 2,
+      "format_on_save": "on",
+    },
+    "JSON": {
+      "tab_size": 2,
+      "format_on_save": "on",
+    },
   },
-  "file_types": {
-    "MDX": ["*.mdx"],
-    "PHP": ["*.php"],
-    "Blade": ["*blade.php"]
-  }
+  "lsp": {
+    "intelephense": {
+      "settings": {
+        "intelephense.files.associations": ["*.php", "*.blade.php"],
+        "intelephense.environment.phpVersion": "8.2.0",
+        "intelephense.stubs": [
+          "apache",
+          "bcmath",
+          "bz2",
+          "calendar",
+          "com_dotnet",
+          "Core",
+          "ctype",
+          "curl",
+          "date",
+          "dba",
+          "dom",
+          "enchant",
+          "exif",
+          "FFI",
+          "fileinfo",
+          "filter",
+          "fpm",
+          "ftp",
+          "gd",
+          "gettext",
+          "gmp",
+          "hash",
+          "iconv",
+          "imap",
+          "intl",
+          "json",
+          "ldap",
+          "libxml",
+          "mbstring",
+          "meta",
+          "mysqli",
+          "oci8",
+          "odbc",
+          "openssl",
+          "pcntl",
+          "pcre",
+          "PDO",
+          "pdo_ibm",
+          "pdo_mysql",
+          "pdo_pgsql",
+          "pdo_sqlite",
+          "pgsql",
+          "Phar",
+          "posix",
+          "pspell",
+          "readline",
+          "Reflection",
+          "session",
+          "shmop",
+          "SimpleXML",
+          "snmp",
+          "soap",
+          "sockets",
+          "sodium",
+          "SPL",
+          "sqlite3",
+          "standard",
+          "superglobals",
+          "sysvmsg",
+          "sysvsem",
+          "sysvshm",
+          "tidy",
+          "tokenizer",
+          "xml",
+          "xmlreader",
+          "xmlrpc",
+          "xmlwriter",
+          "xsl",
+          "Zend OPcache",
+          "zip",
+          "zlib",
+        ],
+      },
+    },
+  },
 }
