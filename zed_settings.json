@@ -7,6 +7,31 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "window_decorations": "client",
+  "use_system_window_tabs": false,
+  "bottom_dock_layout": "contained",
+  "preview_tabs": {
+    "enabled": true
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_user_picture": false,
+    "show_user_menu": true,
+    "show_onboarding_banner": true,
+    "show_sign_in": true,
+    "show_project_items": true,
+    "show_branch_name": true,
+    "show_branch_icon": false
+  },
+  "search": {
+    "button": false
+  },
+  "status_bar": {
+    "cursor_position_button": true
+  },
+  "ui_font_weight": 400.0,
+  "ui_font_family": ".ZedSans",
+  "buffer_line_height": "comfortable",
   "inlay_hints": {
     "enabled": true,
   },
@@ -32,6 +57,7 @@
   "use_auto_surround": true,
   "show_signature_help_after_edits": true,
   "debugger": {
+    "button": false,
     "dock": "right",
   },
   "collaboration_panel": {
@@ -44,10 +70,12 @@
     "dock": "right",
   },
   "project_panel": {
+    "button": true,
     "default_width": 300.0,
     "dock": "right",
   },
   "terminal": {
+    "button": false,
     "dock": "right",
   },
   "when_closing_with_no_tabs": "keep_window_open",
@@ -56,13 +84,14 @@
   },
   "vertical_scroll_margin": 0.0,
   "tabs": {
-    "close_position": "left",
+    "close_position": "right",
     "show_close_button": "hover",
     "file_icons": false,
     "git_status": true,
   },
   "relative_line_numbers": "enabled",
   "diagnostics": {
+    "button": true,
     "inline": {
       "enabled": true,
     },
@@ -85,8 +114,8 @@
     "toggle_relative_line_numbers": true,
     "use_system_clipboard": "never",
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 18,
+  "ui_font_size": 14.0,
+  "buffer_font_size": 16.0,
   "cursor_blink": false,
   "format_on_save": "off",
   // "scroll_beyond_last_line": "off",
@@ -97,6 +126,8 @@
     "Q": "q",
   },
   "tab_bar": {
+    "show_pinned_tabs_in_separate_row": false,
+    "show_tab_bar_buttons": false,
     "show_nav_history_buttons": false,
     "show": true,
   },
