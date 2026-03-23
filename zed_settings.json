@@ -35,8 +35,8 @@
   "inlay_hints": {
     "enabled": true,
   },
-  "ensure_final_newline_on_save": true,
-  "remove_trailing_whitespace_on_save": true,
+  "ensure_final_newline_on_save": false,
+  "remove_trailing_whitespace_on_save": false,
   "edit_predictions": {
     "provider": "copilot",
   },
@@ -134,7 +134,7 @@
   "buffer_font_family": "JetBrains Mono",
   "theme": {
     "mode": "light",
-    "light": "macOS Classic Light",
+    "light": "Vercel Light",
     "dark": "Gruvbox Dark Hard",
   },
   // "languages": {
