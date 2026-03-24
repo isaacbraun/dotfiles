@@ -32,9 +32,6 @@
   "ui_font_weight": 400.0,
   "ui_font_family": ".ZedSans",
   "buffer_line_height": "comfortable",
-  "inlay_hints": {
-    "enabled": true,
-  },
   "ensure_final_newline_on_save": false,
   "remove_trailing_whitespace_on_save": false,
   "edit_predictions": {
