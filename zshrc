@@ -128,15 +128,24 @@ alias sz='source ~/.zshrc'
 
 # git
 alias gs='git status'
+alias ga='git add'
 alias gaa='git add -A'
 alias gc='git commit'
-alias gcm='git checkout main'
+alias gcm='git commit -m'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gsw='git switch'
 # [s]witch and [c]reate branch
 alias gswc='git switch -c'
 # [f]uzzy check[o]ut
+alias gp='git pull'
+alias gu='git push'
+alias gf='git fetch'
+alias lr='git l -30'
+alias cdr='cd $(git rev-parse --show-toplevel)' # cd to git Root
+alias hs='git rev-parse --short HEAD'
+alias hm='git log --format=%B -n 1 HEAD'
+alias pr='gh pr create'
 fo() {
   git branch --no-color --sort=-committerdate --format='%(refname:short)' | fzf --header 'git checkout' | xargs git checkout
 }
@@ -289,14 +298,6 @@ alias lg='lazygit'
 
 # GH Cli FZF aliases
 alias me='gh fzf issue --assignee @me --state open'
-alias gpu='git pull'
-alias gup='git push'
-alias fe='git fetch'
-alias lr='git l -30'
-alias cdr='cd $(git rev-parse --show-toplevel)' # cd to git Root
-alias hs='git rev-parse --short HEAD'
-alias hm='git log --format=%B -n 1 HEAD'
-alias pr='gh pr create'
 
 # tmux
 alias tma='tmux attach -t'
