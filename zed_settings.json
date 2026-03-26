@@ -131,7 +131,7 @@
   },
   "buffer_font_family": "JetBrains Mono",
   "theme": {
-    "mode": "light",
+    "mode": "system",
     "light": "Vercel Light",
     "dark": "Gruvbox Dark Hard",
   },

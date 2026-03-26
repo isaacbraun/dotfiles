@@ -14,5 +14,6 @@ window-decoration = false
 link-url = true
 term = xterm-256color
 window-colorspace = display-p3
-theme = Gruvbox Dark Hard
+# Material, Light Owl, Catppuccin Latte, Dayfox, Raycast Light / Dark
+theme = light:Material,dark:Gruvbox Dark Hard
 adjust-cell-width = -4%
