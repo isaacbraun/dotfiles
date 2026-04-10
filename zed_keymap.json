@@ -158,7 +158,7 @@
     }
   },
   {
-    "context": "(Editor && edit_prediction_conflict)",
+    "context": "(Editor && (edit_prediction && (showing_completions || in_leading_whitespace)))",
     "bindings": {
       "alt-tab": null,
       "ctrl-alt-f": "editor::AcceptEditPrediction"
@@ -178,7 +178,7 @@
     }
   },
   {
-    "context": "((os != macos && Editor) && edit_prediction_conflict)",
+    "context": "((os != macos && Editor) && (edit_prediction && (showing_completions || in_leading_whitespace)))",
     "bindings": {
       "alt-l": null
     }
