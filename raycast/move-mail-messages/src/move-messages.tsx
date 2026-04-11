@@ -5,6 +5,7 @@ import { runAppleScript } from "run-applescript";
 type Mailbox = {
   account: string;
   mailbox: string;
+  path: string;
   label: string;
 };
 
@@ -61,9 +62,10 @@ tell application "Mail"
 	
 	repeat with mb in every mailbox of targetAccount
 		set mbName to name of mb
-		set labelText to acctName & " → " & mbName
+		set mbPath to my mailboxPath(mb)
+		set labelText to acctName & " → " & mbPath
 		
-		set itemJson to "{\\"account\\":\\"" & my escapeJson(acctName) & "\\",\\"mailbox\\":\\"" & my escapeJson(mbName) & "\\",\\"label\\":\\"" & my escapeJson(labelText) & "\\"}"
+		set itemJson to "{\\"account\\":\\"" & my escapeJson(acctName) & "\\",\\"mailbox\\":\\"" & my escapeJson(mbName) & "\\",\\"path\\":\\"" & my escapeJson(mbPath) & "\\",\\"label\\":\\"" & my escapeJson(labelText) & "\\"}"
 		
 		if firstItem then
 			set json to json & itemJson
@@ -77,9 +79,35 @@ tell application "Mail"
 	return json
 end tell
 
+on mailboxPath(theMailbox)
+	set pathParts to {name of theMailbox}
+	set currentMailbox to theMailbox
+	
+	repeat
+		try
+			set parentMailbox to mailbox of currentMailbox
+		on error
+			exit repeat
+		end try
+		
+		if parentMailbox is missing value then
+			exit repeat
+		end if
+		
+		set beginning of pathParts to name of parentMailbox
+		set currentMailbox to parentMailbox
+	end repeat
+	
+	set AppleScript's text item delimiters to " / "
+	set pathText to pathParts as text
+	set AppleScript's text item delimiters to ""
+	return pathText
+end mailboxPath
+
 on escapeJson(t)
+	set quoteChar to ASCII character 34
 	set t to my replaceText("\\\\", "\\\\\\\\", t)
-	set t to my replaceText("\\"", "\\\\\\"", t)
+	set t to my replaceText(quoteChar, "\\\\" & quoteChar, t)
 	return t
 end escapeJson
 
@@ -118,7 +146,7 @@ function escapeAppleScriptString(value: string): string {
   return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
 
-async function moveSelectedMessages(account: string, mailbox: string) {
+async function moveSelectedMessages(account: string, mailboxPath: string) {
   const script = `
 tell application "Mail"
 	set theSelection to selection
@@ -128,11 +156,13 @@ tell application "Mail"
 	end if
 	
 	set targetMailbox to missing value
+	set usesGmail to false
 	
 	repeat with acct in every account
 		if name of acct is "${escapeAppleScriptString(account)}" then
+			set usesGmail to my accountLooksLikeGmail(acct)
 			repeat with mb in every mailbox of acct
-				if name of mb is "${escapeAppleScriptString(mailbox)}" then
+				if my mailboxPath(mb) is "${escapeAppleScriptString(mailboxPath)}" then
 					set targetMailbox to mb
 					exit repeat
 				end if
@@ -145,11 +175,68 @@ tell application "Mail"
 		error "Could not find target mailbox."
 	end if
 	
+	if usesGmail then
+		activate
+	end if
+	
+	set selectionStillPresent to (count of theSelection) is greater than 0
+end tell
+
+if usesGmail and selectionStillPresent then
+	tell application "System Events"
+		tell process "Mail"
+			set archiveMenuItem to menu item "Archive" of menu 1 of menu bar item "Message" of menu bar 1
+			if enabled of archiveMenuItem then
+				click archiveMenuItem
+			end if
+		end tell
+	end tell
+end if
+
+tell application "Mail"
+	set theSelection to selection
+	
 	repeat with theMail in theSelection
 		move theMail to targetMailbox
 	end repeat
 end tell
+
+on accountLooksLikeGmail(theAccount)
+	try
+		set accountName to name of theAccount
+		set accountId to id of theAccount
+		return (accountName contains "gmail") or (accountName contains "Gmail") or (accountName contains "google") or (accountName contains "Google") or (accountId contains "gmail") or (accountId contains "Gmail") or (accountId contains "google") or (accountId contains "Google")
+	on error
+		return false
+	end try
+end accountLooksLikeGmail
+
+on mailboxPath(theMailbox)
+	set pathParts to {name of theMailbox}
+	set currentMailbox to theMailbox
+	
+	repeat
+		try
+			set parentMailbox to mailbox of currentMailbox
+		on error
+			exit repeat
+		end try
+		
+		if parentMailbox is missing value then
+			exit repeat
+		end if
+		
+		set beginning of pathParts to name of parentMailbox
+		set currentMailbox to parentMailbox
+	end repeat
+	
+	set AppleScript's text item delimiters to " / "
+	set pathText to pathParts as text
+	set AppleScript's text item delimiters to ""
+	return pathText
+end mailboxPath
 `;
+
   await runAppleScript(script);
 }
 
@@ -166,7 +253,7 @@ export default function Command() {
       ) : null}
       {mailboxes.map((item) => (
         <List.Item
-          key={`${item.account}::${item.mailbox}`}
+          key={`${item.account}::${item.path}`}
           title={item.mailbox}
           subtitle={item.account}
           accessories={[{ text: item.label }]}
@@ -178,7 +265,7 @@ export default function Command() {
                 onAction={async () => {
                   try {
                     await closeMainWindow();
-                    await moveSelectedMessages(item.account, item.mailbox);
+                    await moveSelectedMessages(item.account, item.path);
                     await showToast({
                       style: Toast.Style.Success,
                       title: "Mail moved",
