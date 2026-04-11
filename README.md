@@ -21,7 +21,9 @@ All files are edited within the repo, then symlinks are created to them using th
 - Zoxide
 - eza
 - Tmux
+- Zed
 - Alacritty: only for Windows. File needs to be copied.
+- [Apfel](https://apfel.franzai.com): only macOS, requires Tahoe so not set up yet.
 
 ## GitHub Desktop Notifications (cron) - macOS Only Currently
 - Install the `gh-notify-desktop` extension and verify it works: `gh extension install benelan/gh-notify-desktop`
