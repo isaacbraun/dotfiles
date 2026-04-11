@@ -8,28 +8,69 @@ type Mailbox = {
   label: string;
 };
 
-async function getMailboxes(): Promise<Mailbox[]> {
+type MailboxState = {
+  mailboxes: Mailbox[];
+  emptyViewTitle?: string;
+  emptyViewDescription?: string;
+};
+
+async function getSelectedAccount(): Promise<string | null> {
+  const script = `
+tell application "Mail"
+	set theSelection to selection
+	
+	if (count of theSelection) is 0 then
+		return ""
+	end if
+	
+	set selectedAccount to name of account of mailbox of item 1 of theSelection
+	
+	repeat with theMail in theSelection
+		if (name of account of mailbox of theMail) is not selectedAccount then
+			error "Please select messages from a single account."
+		end if
+	end repeat
+	
+	return selectedAccount
+end tell
+`;
+
+  const result = await runAppleScript(script);
+  return result || null;
+}
+
+async function getMailboxes(account: string): Promise<Mailbox[]> {
   const script = `
 tell application "Mail"
 	set json to "["
 	set firstItem to true
+	set targetAccount to missing value
 	
 	repeat with acct in every account
-		set acctName to name of acct
+		if name of acct is "${escapeAppleScriptString(account)}" then
+			set targetAccount to acct
+			exit repeat
+		end if
+	end repeat
+	
+	if targetAccount is missing value then
+		error "Could not find the selected account."
+	end if
+	
+	set acctName to name of targetAccount
+	
+	repeat with mb in every mailbox of targetAccount
+		set mbName to name of mb
+		set labelText to acctName & " → " & mbName
 		
-		repeat with mb in every mailbox of acct
-			set mbName to name of mb
-			set labelText to acctName & " → " & mbName
-			
-			set itemJson to "{\\"account\\":\\"" & my escapeJson(acctName) & "\\",\\"mailbox\\":\\"" & my escapeJson(mbName) & "\\",\\"label\\":\\"" & my escapeJson(labelText) & "\\"}"
-			
-			if firstItem then
-				set json to json & itemJson
-				set firstItem to false
-			else
-				set json to json & "," & itemJson
-			end if
-		end repeat
+		set itemJson to "{\\"account\\":\\"" & my escapeJson(acctName) & "\\",\\"mailbox\\":\\"" & my escapeJson(mbName) & "\\",\\"label\\":\\"" & my escapeJson(labelText) & "\\"}"
+		
+		if firstItem then
+			set json to json & itemJson
+			set firstItem to false
+		else
+			set json to json & "," & itemJson
+		end if
 	end repeat
 	
 	set json to json & "]"
@@ -55,6 +96,22 @@ end replaceText
   const result = await runAppleScript(script);
   const parsed = JSON.parse(result) as Mailbox[];
   return parsed.sort((a, b) => a.label.localeCompare(b.label));
+}
+
+async function getMailboxState(): Promise<MailboxState> {
+  const account = await getSelectedAccount();
+
+  if (!account) {
+    return {
+      mailboxes: [],
+      emptyViewTitle: "Select Mail Messages",
+      emptyViewDescription: "Select one or more messages in Mail to show mailboxes from that account.",
+    };
+  }
+
+  return {
+    mailboxes: await getMailboxes(account),
+  };
 }
 
 function escapeAppleScriptString(value: string): string {
@@ -97,10 +154,16 @@ end tell
 }
 
 export default function Command() {
-  const { data: mailboxes = [], isLoading } = usePromise(getMailboxes);
+  const { data, isLoading, error } = usePromise(getMailboxState);
+  const mailboxes = data?.mailboxes ?? [];
+  const emptyViewTitle = error instanceof Error ? "Can't Show Mailboxes" : data?.emptyViewTitle;
+  const emptyViewDescription = error instanceof Error ? error.message : data?.emptyViewDescription;
 
   return (
-    <List isLoading={isLoading} searchBarPlaceholder="Search mailboxes...">
+    <List isLoading={isLoading} searchBarPlaceholder="Search mailboxes..." isShowingDetail={false}>
+      {!isLoading && mailboxes.length === 0 ? (
+        <List.EmptyView title={emptyViewTitle ?? "No Mailboxes Found"} description={emptyViewDescription} />
+      ) : null}
       {mailboxes.map((item) => (
         <List.Item
           key={`${item.account}::${item.mailbox}`}
