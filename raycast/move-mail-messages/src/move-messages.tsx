@@ -36,8 +36,7 @@ tell application "Mail"
 end tell
 `;
 
-  const result = await runAppleScript(script);
-  return result || null;
+  return await runAppleScript(script) || null;
 }
 
 async function getMailboxes(account: string): Promise<Mailbox[]> {
