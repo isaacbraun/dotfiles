@@ -255,7 +255,6 @@ export default function Command() {
         <List.Item
           key={`${item.account}::${item.path}`}
           title={item.mailbox}
-          subtitle={item.account}
           accessories={[{ text: item.label }]}
           icon={Icon.Folder}
           actions={
