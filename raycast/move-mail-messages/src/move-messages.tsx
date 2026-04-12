@@ -1,5 +1,5 @@
 import { Action, ActionPanel, closeMainWindow, Icon, List, showToast, Toast } from "@raycast/api";
-import { usePromise } from "@raycast/utils";
+import { useCachedPromise, usePromise } from "@raycast/utils";
 import { runAppleScript } from "run-applescript";
 
 type Mailbox = {
@@ -9,10 +9,10 @@ type Mailbox = {
   label: string;
 };
 
-type MailboxState = {
-  mailboxes: Mailbox[];
-  emptyViewTitle?: string;
-  emptyViewDescription?: string;
+type RawMailbox = {
+  index: string;
+  mailbox: string;
+  parentIndex: string;
 };
 
 async function getSelectedAccount(): Promise<string | null> {
@@ -36,14 +36,12 @@ tell application "Mail"
 end tell
 `;
 
-  return await runAppleScript(script) || null;
+  return (await runAppleScript(script)) || null;
 }
 
 async function getMailboxes(account: string): Promise<Mailbox[]> {
   const script = `
 tell application "Mail"
-	set json to "["
-	set firstItem to true
 	set targetAccount to missing value
 	
 	repeat with acct in every account
@@ -57,51 +55,50 @@ tell application "Mail"
 		error "Could not find the selected account."
 	end if
 	
-	set acctName to name of targetAccount
+	set mailboxJsonItems to {}
+	set allMailboxes to every mailbox of targetAccount
 	
-	repeat with mb in every mailbox of targetAccount
+	repeat with mailboxIndex from 1 to (count of allMailboxes)
+		set mb to item mailboxIndex of allMailboxes
 		set mbName to name of mb
-		set mbPath to my mailboxPath(mb)
-		set labelText to acctName & " → " & mbPath
+		set parentIndex to ""
 		
-		set itemJson to "{\\"account\\":\\"" & my escapeJson(acctName) & "\\",\\"mailbox\\":\\"" & my escapeJson(mbName) & "\\",\\"path\\":\\"" & my escapeJson(mbPath) & "\\",\\"label\\":\\"" & my escapeJson(labelText) & "\\"}"
-		
-		if firstItem then
-			set json to json & itemJson
-			set firstItem to false
-		else
-			set json to json & "," & itemJson
-		end if
-	end repeat
-	
-	set json to json & "]"
-	return json
-end tell
-
-on mailboxPath(theMailbox)
-	set pathParts to {name of theMailbox}
-	set currentMailbox to theMailbox
-	
-	repeat
 		try
-			set parentMailbox to mailbox of currentMailbox
+			set parentMailbox to mailbox of mb
+			if parentMailbox is not missing value then
+				set parentIndex to (my indexOfMailbox(parentMailbox, allMailboxes)) as text
+			end if
 		on error
-			exit repeat
+			set parentIndex to ""
 		end try
 		
-		if parentMailbox is missing value then
-			exit repeat
-		end if
-		
-		set beginning of pathParts to name of parentMailbox
-		set currentMailbox to parentMailbox
+		set end of mailboxJsonItems to "{\\"index\\":\\"" & mailboxIndex & "\\",\\"mailbox\\":\\"" & my escapeJson(mbName) & "\\",\\"parentIndex\\":\\"" & my escapeJson(parentIndex) & "\\"}"
 	end repeat
 	
-	set AppleScript's text item delimiters to " / "
-	set pathText to pathParts as text
-	set AppleScript's text item delimiters to ""
-	return pathText
-end mailboxPath
+	return "[" & my joinList(mailboxJsonItems, ",") & "]"
+end tell
+
+on indexOfMailbox(targetMailbox, mailboxList)
+	repeat with mailboxIndex from 1 to (count of mailboxList)
+		if item mailboxIndex of mailboxList is targetMailbox then
+			return mailboxIndex
+		end if
+	end repeat
+	
+	return ""
+end indexOfMailbox
+
+on joinList(theList, delimiterText)
+	if (count of theList) is 0 then
+		return ""
+	end if
+	
+	set previousDelimiters to AppleScript's text item delimiters
+	set AppleScript's text item delimiters to delimiterText
+	set joinedText to theList as text
+	set AppleScript's text item delimiters to previousDelimiters
+	return joinedText
+end joinList
 
 on escapeJson(t)
 	set quoteChar to ASCII character 34
@@ -121,24 +118,43 @@ end replaceText
 `;
 
   const result = await runAppleScript(script);
-  const parsed = JSON.parse(result) as Mailbox[];
-  return parsed.sort((a, b) => a.label.localeCompare(b.label));
-}
+  const rawMailboxes = (JSON.parse(result) as RawMailbox[]).map((mailbox) => ({
+    ...mailbox,
+    parentIndex: mailbox.parentIndex || "",
+  }));
+  const mailboxesByIndex = new Map(rawMailboxes.map((mailbox) => [mailbox.index, mailbox]));
+  const pathsByIndex = new Map<string, string>();
 
-async function getMailboxState(): Promise<MailboxState> {
-  const account = await getSelectedAccount();
+  function getMailboxPath(mailbox: RawMailbox, visiting = new Set<string>()): string {
+    const cachedPath = pathsByIndex.get(mailbox.index);
+    if (cachedPath) {
+      return cachedPath;
+    }
 
-  if (!account) {
-    return {
-      mailboxes: [],
-      emptyViewTitle: "Select Mail Messages",
-      emptyViewDescription: "Select one or more messages in Mail to show mailboxes from that account.",
-    };
+    if (visiting.has(mailbox.index)) {
+      return mailbox.mailbox;
+    }
+
+    visiting.add(mailbox.index);
+    const parentMailbox = mailbox.parentIndex ? mailboxesByIndex.get(mailbox.parentIndex) : undefined;
+    const path = parentMailbox ? `${getMailboxPath(parentMailbox, visiting)} / ${mailbox.mailbox}` : mailbox.mailbox;
+    visiting.delete(mailbox.index);
+    pathsByIndex.set(mailbox.index, path);
+    return path;
   }
 
-  return {
-    mailboxes: await getMailboxes(account),
-  };
+  return rawMailboxes
+    .map((mailbox) => {
+      const path = getMailboxPath(mailbox);
+
+      return {
+        account,
+        mailbox: mailbox.mailbox,
+        path,
+        label: `${account} → ${path}`,
+      };
+    })
+    .sort((a, b) => a.label.localeCompare(b.label));
 }
 
 function escapeAppleScriptString(value: string): string {
@@ -240,10 +256,34 @@ end mailboxPath
 }
 
 export default function Command() {
-  const { data, isLoading, error } = usePromise(getMailboxState);
-  const mailboxes = data?.mailboxes ?? [];
-  const emptyViewTitle = error instanceof Error ? "Can't Show Mailboxes" : data?.emptyViewTitle;
-  const emptyViewDescription = error instanceof Error ? error.message : data?.emptyViewDescription;
+  const { data: selectedAccount, isLoading: isLoadingAccount, error: accountError } = usePromise(getSelectedAccount);
+  const {
+    data: cachedMailboxes,
+    isLoading: isLoadingMailboxes,
+    error: mailboxError,
+  } = useCachedPromise(getMailboxes, selectedAccount ? [selectedAccount] : [], {
+    execute: selectedAccount !== undefined && selectedAccount !== null,
+    onError: () => undefined,
+  });
+
+  const mailboxes = cachedMailboxes ?? [];
+  const isLoading =
+    isLoadingAccount || (selectedAccount !== undefined && selectedAccount !== null && isLoadingMailboxes);
+  const hasMailboxError = mailboxError instanceof Error && mailboxes.length === 0;
+  const emptyViewTitle =
+    accountError instanceof Error || hasMailboxError
+      ? "Can't Show Mailboxes"
+      : selectedAccount === null
+        ? "Select Mail Messages"
+        : "No Mailboxes Found";
+  const emptyViewDescription =
+    accountError instanceof Error
+      ? accountError.message
+      : hasMailboxError
+        ? mailboxError.message
+        : selectedAccount === null
+          ? "Select one or more messages in Mail to show mailboxes from that account."
+          : undefined;
 
   return (
     <List isLoading={isLoading} searchBarPlaceholder="Search mailboxes..." isShowingDetail={false}>
