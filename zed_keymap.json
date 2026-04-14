@@ -339,5 +339,29 @@
     "bindings": {
       "alt-s": null
     }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-k s": "workspace::Save"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-s": "workspace::Save"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-s": "workspace::SaveWithoutFormat"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-k s": "workspace::SaveWithoutFormat"
+    }
   }
 ]
