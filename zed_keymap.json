@@ -134,12 +134,6 @@
     }
   },
   {
-    "context": "Workspace",
-    "bindings": {
-      "alt-g": "git_panel::ToggleFocus"
-    }
-  },
-  {
     "context": "vim_mode == literal",
     "bindings": {
       "ctrl-f": null
@@ -362,6 +356,45 @@
     "context": "Workspace",
     "unbind": {
       "cmd-k s": "workspace::SaveWithoutFormat"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-t": "terminal_panel::Toggle"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-`": "terminal_panel::Toggle"
+    }
+  },
+  {
+    "bindings": {
+      "alt-g": "git_panel::Toggle"
+    }
+  },
+  {
+    "context": "AgentPanel",
+    "unbind": {
+      "cmd-shift-e": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "cmd-shift-e": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "bindings": {
+      "alt-e": "project_panel::Toggle"
+    }
+  },
+  {
+    "bindings": {
+      "alt-a": "agent::Toggle"
     }
   }
 ]

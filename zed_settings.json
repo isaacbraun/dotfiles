@@ -73,6 +73,12 @@
     "dock": "right"
   },
   "terminal": {
+    "toolbar": {
+      "breadcrumbs": false
+    },
+    "cursor_shape": "block",
+    "font_size": 17.0,
+    "font_weight": 300.0,
     "button": false,
     "dock": "right"
   },
@@ -95,10 +101,18 @@
     }
   },
   "agent": {
-    "default_profile": "ask",
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "gpt-5.4",
+        "enable_thinking": false
+      }
+    ],
+    "default_profile": "write",
     "default_model": {
+      "effort": "high",
       "provider": "copilot_chat",
-      "model": "gpt-5"
+      "model": "gpt-5.4"
     },
     "use_modifier_to_send": true
   },
