@@ -39,7 +39,9 @@ unsetopt HIST_VERIFY          # Execute commands using history (e.g.: using !$) 
 #############
 # COMPLETION
 #############
-
+zstyle ':completion:*:*:git:*' script ~/.git-completion.bash
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit && compinit
 
 ###############
 # KEY BINDINGS

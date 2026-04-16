@@ -5,6 +5,15 @@ $(HOME)/.%: %
 	ln -sf $(DOTFILE_PATH)/$^ $@
 
 git: $(HOME)/.gitconfig $(HOME)/.githelpers $(HOME)/.gitignore $(HOME)/.gitconfig-enterprise
+	
+$(HOME)/.git-completion.bash: git-completion/git-completion.bash
+	ln -sf $(DOTFILE_PATH)/$^ $@
+
+$(HOME)/.zsh/_git: git-completion/git-completion.zsh
+	mkdir -p $(HOME)/.zsh
+	ln -sf $(DOTFILE_PATH)/$^ $@
+
+git-completion: $(HOME)/.git-completion.bash $(HOME)/.zsh/_git
 
 zsh: $(HOME)/.zshrc
 
