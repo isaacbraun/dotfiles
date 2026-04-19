@@ -111,6 +111,9 @@ alias lsa='eza --icons --long --git --no-user -a'
 alias history='history 1'
 alias hs='history | grep '
 
+# Apfel scripts
+alias cmd='~/scripts/apfel-cmd.sh'
+
 # Use rsync with ssh and show progress
 alias rsyncssh='rsync -Pr --rsh=ssh'
 
