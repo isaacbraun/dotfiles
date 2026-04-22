@@ -139,9 +139,9 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias gsw='git switch'
+alias sw='git switch'
 # [s]witch and [c]reate branch
-alias gswc='git switch -c'
+alias swc='git switch -c'
 # [f]uzzy check[o]ut
 alias gp='git pull'
 alias gu='git push'
