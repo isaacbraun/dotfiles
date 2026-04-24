@@ -254,7 +254,7 @@
   },
   {
     "bindings": {
-      "ctrl-a f": "git::Worktree"
+      "ctrl-a w": "git::Worktree"
     }
   },
   {
@@ -418,7 +418,7 @@
   {
     "context": "Workspace",
     "unbind": {
-      "alt-cmd-o": [
+      "ctrl-r": [
         "projects::OpenRecent",
         {
           "create_new_window": false
@@ -429,7 +429,7 @@
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-p": [
+      "ctrl-a f": [
         "projects::OpenRecent",
         {
           "create_new_window": false
@@ -440,7 +440,7 @@
   {
     "context": "Workspace",
     "unbind": {
-      "ctrl-r": [
+      "alt-cmd-o": [
         "projects::OpenRecent",
         {
           "create_new_window": false
