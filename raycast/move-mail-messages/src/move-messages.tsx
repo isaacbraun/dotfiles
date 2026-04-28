@@ -190,11 +190,15 @@ tell application "Mail"
 		error "Could not find target mailbox."
 	end if
 	
+	repeat with theMail in theSelection
+		move theMail to targetMailbox
+	end repeat
+	
+	set selectionStillPresent to (count of selection) is greater than 0
+	
 	if usesGmail then
 		activate
 	end if
-	
-	set selectionStillPresent to (count of theSelection) is greater than 0
 end tell
 
 if usesGmail and selectionStillPresent then
@@ -207,14 +211,6 @@ if usesGmail and selectionStillPresent then
 		end tell
 	end tell
 end if
-
-tell application "Mail"
-	set theSelection to selection
-	
-	repeat with theMail in theSelection
-		move theMail to targetMailbox
-	end repeat
-end tell
 
 on accountLooksLikeGmail(theAccount)
 	try
