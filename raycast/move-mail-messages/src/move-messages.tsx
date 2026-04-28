@@ -7,6 +7,7 @@ type Mailbox = {
   mailbox: string;
   path: string;
   label: string;
+  specialUse?: string;
 };
 
 type RawMailbox = {
@@ -14,6 +15,22 @@ type RawMailbox = {
   mailbox: string;
   parentIndex: string;
 };
+
+const SPECIAL_MAILBOX_DISPLAY_NAMES: Record<string, string> = {
+  INBOX: "Inbox",
+};
+
+function getDisplayMailboxName(name: string): string {
+  return SPECIAL_MAILBOX_DISPLAY_NAMES[name] ?? name;
+}
+
+function getSpecialMailboxUse(path: string): string | undefined {
+  if (path === "INBOX") {
+    return "inbox";
+  }
+
+  return undefined;
+}
 
 async function getSelectedAccount(): Promise<string | null> {
   const script = `
@@ -146,12 +163,17 @@ end replaceText
   return rawMailboxes
     .map((mailbox) => {
       const path = getMailboxPath(mailbox);
+      const displayPath = path
+        .split(" / ")
+        .map((pathPart) => getDisplayMailboxName(pathPart))
+        .join(" / ");
 
       return {
         account,
-        mailbox: mailbox.mailbox,
+        mailbox: getDisplayMailboxName(mailbox.mailbox),
         path,
-        label: `${account} → ${path}`,
+        label: `${account} → ${displayPath}`,
+        specialUse: getSpecialMailboxUse(path),
       };
     })
     .sort((a, b) => a.label.localeCompare(b.label));
@@ -161,7 +183,7 @@ function escapeAppleScriptString(value: string): string {
   return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
 
-async function moveSelectedMessages(account: string, mailboxPath: string) {
+async function moveSelectedMessages(account: string, mailboxPath: string, specialUse?: string) {
   const script = `
 tell application "Mail"
 	set theSelection to selection
@@ -172,19 +194,26 @@ tell application "Mail"
 	
 	set targetMailbox to missing value
 	set usesGmail to false
+	set shouldArchiveAfterMove to false
 	
 	repeat with acct in every account
 		if name of acct is "${escapeAppleScriptString(account)}" then
 			set usesGmail to my accountLooksLikeGmail(acct)
-			repeat with mb in every mailbox of acct
-				if my mailboxPath(mb) is "${escapeAppleScriptString(mailboxPath)}" then
-					set targetMailbox to mb
-					exit repeat
-				end if
-			end repeat
+			if "${escapeAppleScriptString(specialUse ?? "")}" is "inbox" then
+				set targetMailbox to first mailbox of acct whose name is "INBOX"
+			else
+				repeat with mb in every mailbox of acct
+					if my mailboxPath(mb) is "${escapeAppleScriptString(mailboxPath)}" then
+						set targetMailbox to mb
+						exit repeat
+					end if
+				end repeat
+			end if
 			exit repeat
 		end if
 	end repeat
+
+	set shouldArchiveAfterMove to usesGmail and "${escapeAppleScriptString(specialUse ?? "")}" is not "inbox"
 	
 	if targetMailbox is missing value then
 		error "Could not find target mailbox."
@@ -196,12 +225,12 @@ tell application "Mail"
 	
 	set selectionStillPresent to (count of selection) is greater than 0
 	
-	if usesGmail then
+	if shouldArchiveAfterMove then
 		activate
 	end if
 end tell
 
-if usesGmail and selectionStillPresent then
+if shouldArchiveAfterMove and selectionStillPresent then
 	tell application "System Events"
 		tell process "Mail"
 			set archiveMenuItem to menu item "Archive" of menu 1 of menu bar item "Message" of menu bar 1
@@ -299,7 +328,7 @@ export default function Command() {
                 onAction={async () => {
                   try {
                     await closeMainWindow();
-                    await moveSelectedMessages(item.account, item.path);
+                    await moveSelectedMessages(item.account, item.path, item.specialUse);
                     await showToast({
                       style: Toast.Style.Success,
                       title: "Mail moved",
