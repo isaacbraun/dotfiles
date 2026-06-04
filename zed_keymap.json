@@ -360,12 +360,6 @@
   },
   {
     "context": "Workspace",
-    "bindings": {
-      "alt-t": "terminal_panel::Toggle"
-    }
-  },
-  {
-    "context": "Workspace",
     "unbind": {
       "ctrl-`": "terminal_panel::Toggle"
     }
@@ -446,6 +440,11 @@
           "create_new_window": false
         }
       ]
+    }
+  },
+  {
+    "bindings": {
+      "alt-t": "terminal_panel::ToggleFocus"
     }
   }
 ]
