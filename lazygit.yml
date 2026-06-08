@@ -1,2 +1,6 @@
 os:
-  editPreset: 'zed'
+  editPreset: "zed"
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --paging=never

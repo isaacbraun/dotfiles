@@ -23,6 +23,7 @@ All files are edited within the repo, then symlinks are created to them using th
 - Tmux
 - Zed
 - Alacritty: only for Windows. File needs to be copied.
+- [Delta](https://github.com/dandavison/delta) - diff viewer
 - [Apfel](https://apfel.franzai.com): only macOS
 
 ## GitHub Desktop Notifications (cron) - macOS Only Currently
