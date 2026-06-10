@@ -475,7 +475,10 @@ export PATH="$HOME/bin:$PATH"
 eval "$(zoxide init --cmd cd zsh)"
 
 ## Mise Activate
-eval "$(mise activate zsh)"
+# If work computer (isa14596), activate mise
+if [[ "$(uname -n)" == "isa14596" ]]; then
+  eval "$(mise activate zsh)"
+fi
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
   export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
