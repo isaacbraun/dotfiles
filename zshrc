@@ -14,7 +14,7 @@ local dir_info_color="%B%F{#fabd2f}"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 ##########
@@ -411,20 +411,6 @@ simple_prompt() {
 # Set it to 10ms
 export KEYTIMEOUT=1
 
-export PATH="$HOME/neovim/bin:$PATH"
-export PATH="/opt/nvim-linux64/bin:$PATH"
-
-if type nvim &> /dev/null; then
-  alias vim="nvim"
-  export EDITOR="nvim"
-  export PSQL_EDITOR="nvim -c"set filetype=sql""
-  export GIT_EDITOR="nvim"
-else
-  export EDITOR='vim'
-  export PSQL_EDITOR='vim -c"set filetype=sql"'
-  export GIT_EDITOR='vim'
-fi
-
 # fzf
 if type fzf &> /dev/null && type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*"'
@@ -433,11 +419,11 @@ if type fzf &> /dev/null && type rg &> /dev/null; then
 fi
 
 # pnpm
-export PNPM_HOME="/home/isaac/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+# export PNPM_HOME="/home/isaac/.local/share/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
 # pnpm end
 
 # bun completions
@@ -470,6 +456,18 @@ fi
 
 # Export my personal ~/bin as last one to have highest precedence
 export PATH="$HOME/bin:$PATH"
+
+# Neovim as default editor if available, otherwise fallback to vim
+if type nvim &> /dev/null; then
+  alias vim="nvim"
+  export EDITOR="nvim"
+  export PSQL_EDITOR="nvim -c"set filetype=sql""
+  export GIT_EDITOR="nvim"
+else
+  export EDITOR='vim'
+  export PSQL_EDITOR='vim -c"set filetype=sql"'
+  export GIT_EDITOR='vim'
+fi
 
 # Zoxide init
 eval "$(zoxide init --cmd cd zsh)"
