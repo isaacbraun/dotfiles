@@ -85,3 +85,5 @@
 	format = ssh
 [gpg "ssh"]
 	allowedSignersFile = /Users/isaac/.ssh/allowed_signers
+[fetch]
+	prune = true
