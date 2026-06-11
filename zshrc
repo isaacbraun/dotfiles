@@ -143,16 +143,17 @@ alias gdc='git diff --cached'
 alias sw='git switch'
 # [s]witch and [c]reate branch
 alias swc='git switch -c'
-# [f]uzzy check[o]ut
-alias gp='git pull'
-alias gu='git push'
-alias guf='git push --force-with-lease'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gu='git pull'
 alias gf='git fetch'
 alias lr='git l -30'
 alias cdr='cd $(git rev-parse --show-toplevel)' # cd to git Root
 alias hs='git rev-parse --short HEAD'
 alias hm='git log --format=%B -n 1 HEAD'
 alias pr='gh pr create'
+
+# [f]uzzy check[o]ut
 fo() {
   git branch --no-color --sort=-committerdate --format='%(refname:short)' | fzf --header 'git checkout' | xargs git checkout
 }
