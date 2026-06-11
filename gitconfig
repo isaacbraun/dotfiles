@@ -1,7 +1,7 @@
 [user]
   name = Isaac Braun
 	email = isaac@braunbauen.com
-	signingkey = /Users/isaac/.ssh/id_signing_ed25519.pub
+	signingkey = ~/.ssh/id_signing_ed25519.pub
 
 # Conditional identities
 [includeIf "gitdir:~/dev/enterprise/"]
@@ -84,6 +84,6 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	allowedSignersFile = /Users/isaac/.ssh/allowed_signers
+	allowedSignersFile = ~/.ssh/allowed_signers
 [fetch]
 	prune = true
