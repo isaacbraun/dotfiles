@@ -14,11 +14,16 @@
   sw = switch
   co = checkout
   cl = clone
+  cp = cherry-pick
   st = status
   rh = reset HEAD
   rhh = reset --hard HEAD
   pu = pull
   up = push
+
+  bl = branch --list
+  # Lists all branches including remote branches
+  branches = branch -a
 
   l = "!. ~/.githelpers && pretty_git_log"
   la = "!git l --all"
@@ -28,11 +33,26 @@
   feature = !sh -c 'git checkout --no-track -b $0 origin/main'
 
   ruf = "!. ~/.githelpers && remove_untracked_files"
-
 	tree = log --oneline --decorate --graph
+
+  # Push to origin and set upstream
+  bup = push -u origin HEAD
+  sync = !git pull --rebase && git push
 
   # Taken from here: https://aaronbonner.io/post/80766268890/git-alias-to-simplify-setting-upstream-branch
   sup = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"
+
+  # Taken from: https://haacked.com/archive/2025/04/17/git-gone/
+  # Lists one-line commit summaries for the current branch (vs default branch)
+  branchlog = "!f() { DEFAULT=$(git default); git --no-pager log --oneline $DEFAULT..HEAD; }; f"
+  default = "!git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"
+  # Prune remote-merged branches (gh poi), delete local merged branches and their worktrees,
+  # then delete stranded local branches (ancestors of default with no upstream, no worktree).
+  bclean = "!git gone | xargs -r git branch -D"
+  # Switches to specified branch (or the default branch if no branch is specified), runs git up, then runs bclean.
+  bdone = "!f() { DEFAULT=$(git default); git checkout ${1-$DEFAULT} && git pull && git bclean; }; f"
+  gone = "!git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads/ | awk '$2 == \"[gone]\" { print $1 }'"
+  open = "!f(){ URL=$(git config remote.origin.url); open ${URL%.git}; }; f"
 
 [core]
   excludesfile = ~/.gitignore

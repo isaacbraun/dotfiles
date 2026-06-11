@@ -132,6 +132,7 @@ alias ez='vi ~/.zshrc'
 alias sz='source ~/.zshrc'
 
 # git
+alias g='git'
 alias gs='git status'
 alias ga='git add'
 alias gaa='git add -A'
