@@ -146,6 +146,7 @@ alias swc='git switch -c'
 # [f]uzzy check[o]ut
 alias gp='git pull'
 alias gu='git push'
+alias guf='git push --force-with-lease'
 alias gf='git fetch'
 alias lr='git l -30'
 alias cdr='cd $(git rev-parse --show-toplevel)' # cd to git Root
