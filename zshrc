@@ -476,9 +476,12 @@ fi
 eval "$(zoxide init --cmd cd zsh)"
 
 ## Mise Activate
-# If work computer (isa14596), activate mise
-if [[ "$(uname -n)" == "isa14596" ]]; then
+# If work account (isa14596), activate mise
+if [[ "$USER" == "isa14596" ]]; then
   eval "$(mise activate zsh)"
+else
+  # Activate Vite+ bin (https://viteplus.dev)
+  . "$HOME/.vite-plus/env"
 fi
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -502,6 +505,3 @@ export PHP_INI_SCAN_DIR="/Users/isa14596/.config/herd-lite/bin:$PHP_INI_SCAN_DIR
 
 # opencode
 export PATH=/Users/isaac/.opencode/bin:$PATH
-
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
