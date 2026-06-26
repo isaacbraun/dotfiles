@@ -329,6 +329,11 @@ alias ar='php artisan'
 # OpenCode
 alias oc='opencode'
 
+# Replace cat with bat if available
+if type bat &> /dev/null; then
+  alias cat='bat'
+fi
+
 ##########
 # FUNCTIONS
 ##########
