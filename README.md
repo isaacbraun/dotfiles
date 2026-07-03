@@ -8,6 +8,11 @@ Previously heavily based on [Thorsten Ball's dotfiles](https://github.com/mrnugg
 ## Usage
 All files are edited within the repo, then symlinks are created to them using mise bootstrap.
 
+### Installation
+
+> [!IMPORTANT]
+> Git must be installed and configured with SSH keys.
+
 ```sh
 curl https://mise.run | sh
 git clone <repo-url> ~/dev/dotfiles
@@ -16,14 +21,14 @@ mise trust
 mise bootstrap
 ```
 
-Useful checks:
+### Useful checks:
 
 ```sh
 mise bootstrap --dry-run
 mise dotfiles status
 ```
 
-Manual tasks:
+### Manual tasks:
 
 ```sh
 mise run scripts
