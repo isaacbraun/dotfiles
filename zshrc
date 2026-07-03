@@ -326,8 +326,10 @@ alias -g withcolors="| sed '/PASS/s//$(printf "\033[32mPASS\033[0m")/' | sed '/F
 # PHP/Laravel
 alias ar='php artisan'
 
-# OpenCode
-alias oc='opencode'
+# Replace cat with bat if available
+if type bat &> /dev/null; then
+  alias cat='bat'
+fi
 
 ##########
 # FUNCTIONS
@@ -443,20 +445,12 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add Mason bin to path
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-
-  # Brew
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  # Add homewbrew/bin to path
-  export PATH="$HOME/homebrew/bin:$PATH"
-  # Add Go
-  export PATH="/usr/local/go/bin/go/:$PATH"
-elif [[ "$(uname -s)" == "Linux" ]]; then
-  export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-fi
+# Brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# Add homewbrew/bin to path
+export PATH="$HOME/homebrew/bin:$PATH"
+# Add Go
+export PATH="/usr/local/go/bin/go/:$PATH"
 
 # Export my personal ~/bin as last one to have highest precedence
 export PATH="$HOME/bin:$PATH"
@@ -473,36 +467,16 @@ else
   export GIT_EDITOR='vim'
 fi
 
+## Mise Activate
+eval "$(mise activate zsh)"
+
 # Zoxide init
 eval "$(zoxide init --cmd cd zsh)"
 
-## Mise Activate
-# If work account (isa14596), activate mise
-if [[ "$USER" == "isa14596" ]]; then
-  eval "$(mise activate zsh)"
-else
-  # Activate Vite+ bin (https://viteplus.dev)
-  . "$HOME/.vite-plus/env"
-fi
-
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-
-  # Brew
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-
-  # opencode
-  export PATH=/Users/isa14596/.opencode/bin:$PATH
-  export PATH=/Users/isaac/.opencode/bin:$PATH
-elif [[ "$(uname -s)" == "Linux" ]]; then
-  export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-fi
-
-alias oc="opencode"
-export PATH="/Users/isa14596/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="/Users/isa14596/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+# TODO: need to research how to have vite+ and mise work well together
+# Activate Vite+ bin (https://viteplus.dev)
+# . "$HOME/.vite-plus/env"
 
 # opencode
-export PATH=/Users/isaac/.opencode/bin:$PATH
+alias oc="opencode"
+export PATH="$HOME/.opencode/bin:$PATH"
