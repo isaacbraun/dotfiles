@@ -445,20 +445,12 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add Mason bin to path
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-
-  # Brew
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  # Add homewbrew/bin to path
-  export PATH="$HOME/homebrew/bin:$PATH"
-  # Add Go
-  export PATH="/usr/local/go/bin/go/:$PATH"
-elif [[ "$(uname -s)" == "Linux" ]]; then
-  export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-fi
+# Brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+# Add homewbrew/bin to path
+export PATH="$HOME/homebrew/bin:$PATH"
+# Add Go
+export PATH="/usr/local/go/bin/go/:$PATH"
 
 # Export my personal ~/bin as last one to have highest precedence
 export PATH="$HOME/bin:$PATH"
@@ -484,20 +476,6 @@ eval "$(zoxide init --cmd cd zsh)"
 # TODO: need to research how to have vite+ and mise work well together
 # Activate Vite+ bin (https://viteplus.dev)
 # . "$HOME/.vite-plus/env"
-
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  export PATH="/Users/isaac/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/Users/isaac/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-
-  # Brew
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ "$(uname -s)" == "Linux" ]]; then
-  export PATH="/home/bauen/.config/herd-lite/bin:$PATH"
-  export PHP_INI_SCAN_DIR="/home/bauen/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
-fi
-
-export PATH="/Users/isa14596/.config/herd-lite/bin:$PATH"
-export PHP_INI_SCAN_DIR="/Users/isa14596/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
 
 # opencode
 alias oc="opencode"
