@@ -14,8 +14,8 @@ All files are edited within the repo, then symlinks are created to them using mi
 > Git must be installed and configured with SSH keys.
 
 ```sh
-curl https://mise.run | sh
-git clone <repo-url> ~/dev/dotfiles
+curl -fsSL https://mise.run | sh
+git clone git@github.com:isaacbraun/dotfiles.git ~/dev/dotfiles
 cd ~/dev/dotfiles
 mise trust
 mise bootstrap
