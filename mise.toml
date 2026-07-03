@@ -1,0 +1,67 @@
+[settings]
+experimental = true
+dotfiles.default_mode = "symlink"
+
+[tools]
+bat = "latest"
+eza = "latest"
+fd = "latest"
+fzf = "latest"
+go = "latest"
+lazygit = "latest"
+neovim = "latest"
+node = "latest"
+python = "3"
+ripgrep = "latest"
+rust = "latest"
+zoxide = "latest"
+
+## Need to add and setup GitHub CLI etc.
+# gh = "latest"
+# git-delta = "latest"
+# git-lfs = "latest"
+
+[dotfiles]
+"~/.gitconfig" = "gitconfig"
+"~/.githelpers" = "githelpers"
+"~/.gitignore" = "gitignore"
+"~/.gitconfig-enterprise" = "gitconfig-enterprise"
+"~/.git-completion.bash" = "git-completion/git-completion.bash"
+"~/.zsh/_git" = "git-completion/git-completion.zsh"
+"~/.zshrc" = "zshrc"
+"~/scripts" = "scripts"
+"~/.config/ghostty/config" = "ghostty_config"
+"~/.config/zed/settings.json" = "zed_settings.json"
+"~/.config/zed/keymap.json" = "zed_keymap.json"
+"~/.config/lazygit/config.yml" = "lazygit.yml"
+"~/.config/mise/config.toml" = "mise.toml"
+
+[tasks.link]
+description = "Apply dotfile symlinks"
+run = "mise dotfiles apply --yes"
+
+[tasks.scripts]
+description = "Make scripts executable"
+run = "chmod +x scripts/*"
+
+[tasks.obsidian]
+description = "Link Obsidian vimrc"
+run = '''
+if [ -d "$HOME/notes" ]; then
+  ln -sf "$MISE_PROJECT_ROOT/obsidian.vimrc" "$HOME/notes/.obsidian.vimrc"
+  echo "Linked Obsidian vimrc to $HOME/notes/.obsidian.vimrc"
+else
+  mkdir -p "$HOME/obsidian/bauen"
+  ln -sf "$MISE_PROJECT_ROOT/obsidian.vimrc" "$HOME/obsidian/bauen/.obsidian.vimrc"
+  echo "Linked Obsidian vimrc to $HOME/obsidian/bauen/.obsidian.vimrc"
+fi
+'''
+
+[bootstrap.packages]
+"brew:tree-sitter-cli" = "latest"
+
+[bootstrap.hooks.final]
+run = [
+  "mise run scripts",
+  "mise run obsidian",
+]
