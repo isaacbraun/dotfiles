@@ -21,6 +21,9 @@ zoxide = "latest"
 # git-delta = "latest"
 # git-lfs = "latest"
 
+[bootstrap.repos]
+"~/.config/nvim" = { url = "git@github.com:isaacbraun/nvim.git" }
+
 [dotfiles]
 "~/.gitconfig" = "gitconfig"
 "~/.githelpers" = "githelpers"
