@@ -1,0 +1,9 @@
+[keys]
+prefix = "ctrl+a"
+goto = "ctrl+b"
+
+[theme]
+name = "catppuccin-latte"
+auto_switch = true
+light_name = "catppuccin-latte"
+dark_name = "gruvbox-dark-hard"
