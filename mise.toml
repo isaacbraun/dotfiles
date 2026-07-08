@@ -9,6 +9,7 @@ eza = "latest"
 fd = "latest"
 fzf = "latest"
 go = "latest"
+herdr = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "latest"
@@ -39,6 +40,7 @@ zoxide = "latest"
 "~/.config/zed/keymap.json" = "zed_keymap.json"
 "~/.config/lazygit/config.yml" = "lazygit.yml"
 "~/.config/mise/config.toml" = "mise.toml"
+"~/.config/herdr/config.toml" = "herdr.toml"
 
 [tasks.link]
 description = "Apply dotfile symlinks"
@@ -61,6 +63,14 @@ else
 fi
 '''
 
+[tasks.herdr]
+description = "Run herdr setup"
+run = [
+  "herdr integration install opencode",
+  "herdr integration install copilot",
+  "npx skills add ogulcancelik/herdr --skill herdr -g",
+]
+
 [bootstrap.packages]
 "brew:tree-sitter-cli" = "latest"
 
@@ -68,4 +78,5 @@ fi
 run = [
   "mise run scripts",
   "mise run obsidian",
+  "mise run herdr",
 ]
