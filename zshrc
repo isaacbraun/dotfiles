@@ -305,13 +305,11 @@ function gwt() {
 # lazygit alias
 alias lg='lazygit'
 
+# tuicr alias
+alias tw='tuicr'
+
 # GH Cli FZF aliases
 alias me='gh fzf issue --assignee @me --state open'
-
-# tmux
-alias tma='tmux attach -t'
-alias tmn='tmux new -s'
-alias tmm='tmux new -s main'
 
 # ceedee dot dot dot
 alias -g ...='../..'
