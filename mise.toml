@@ -45,6 +45,7 @@ zoxide = "latest"
 "~/.config/herdr/config.toml" = "herdr.toml"
 "~/.config/herdr/plugins/config/aarsh21.tab-title/config.toml" = "herdr-tab-title.toml"
 "~/.config/herdr/plugins/config/pickr/config.toml" = "herdr-pickr.toml"
+"~/.config/herdr/plugins/config/spotify-now-playing/config.toml" = "herdr-spotify.toml"
 "~/.config/opencode/opencode.json" = "opencode.jsonc"
 "~/.config/tuicr/config.toml" = "tuicr.toml"
 
