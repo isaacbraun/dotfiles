@@ -10,7 +10,7 @@ command = "spotify-now-playing.open"
 description = "Spotify now playing"
 
 [[keys.command]]
-key = "prefix+f"
+key = "ctrl+/"
 type = "plugin_action"
 command = "sessionizer.pick"
 description = "Open sessionizer"
