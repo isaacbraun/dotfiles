@@ -3,6 +3,12 @@ onboarding = false
 prefix = "ctrl+a"
 goto = "ctrl+b"
 
+[[keys.command]]
+key = "prefix+m"
+type = "plugin_action"
+command = "spotify-now-playing.open"
+description = "Spotify now playing"
+
 [theme]
 name = "catppuccin-latte"
 auto_switch = true
@@ -12,3 +18,6 @@ dark_name = "gruvbox-dark-hard"
 [ui]
 agent_panel_sort = "priority"
 show_agent_labels_on_pane_borders = false
+
+[experimental]
+kitty_graphics = true
