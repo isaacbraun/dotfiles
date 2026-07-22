@@ -42,6 +42,7 @@ zoxide = "latest"
 "~/.config/lazygit/config.yml" = "lazygit.yml"
 "~/.config/mise/config.toml" = "mise.toml"
 "~/.config/herdr/config.toml" = "herdr.toml"
+"~/.config/herdr/plugins/config/aarsh21.tab-title/config.toml" = "herdr-tab-title.toml"
 
 [tasks.link]
 description = "Apply dotfile symlinks"
