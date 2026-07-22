@@ -44,6 +44,7 @@ zoxide = "latest"
 "~/.config/mise/config.toml" = "mise.toml"
 "~/.config/herdr/config.toml" = "herdr.toml"
 "~/.config/herdr/plugins/config/aarsh21.tab-title/config.toml" = "herdr-tab-title.toml"
+"~/.config/herdr/plugins/config/pickr/config.toml" = "herdr-pickr.toml"
 "~/.config/opencode/opencode.json" = "opencode.jsonc"
 "~/.config/tuicr/config.toml" = "tuicr.toml"
 
@@ -77,6 +78,7 @@ run = [
   "herdr plugin action invoke aarsh21.tab-title.start",
   "herdr plugin install salkhalil/herdr-sessionizer -y",
   "herdr plugin install iikjl/herdr-spotify -y",
+  "herdr plugin install tomasvarga/herdr-pickr -y",
   "npx skills add ogulcancelik/herdr --skill herdr -g",
 ]
 

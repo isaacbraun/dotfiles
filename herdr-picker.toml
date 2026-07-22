@@ -1,0 +1,11 @@
+[pickr]
+default = "tuicr"
+
+[[backend]]
+key = "t"
+id  = "tuicr"
+name = "tuicr — full review"
+run  = "tuicr pr {url}"     # {url} substituted; run_github / run_gitlab per platform
+where = "pane"              # pane | pager | detach
+needs = ["tuicr"]           # binaries required (gh ↔ glab on GitLab)
+platforms = ["github"]
