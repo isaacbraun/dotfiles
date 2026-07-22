@@ -43,6 +43,7 @@ zoxide = "latest"
 "~/.config/mise/config.toml" = "mise.toml"
 "~/.config/herdr/config.toml" = "herdr.toml"
 "~/.config/herdr/plugins/config/aarsh21.tab-title/config.toml" = "herdr-tab-title.toml"
+"~/.config/opencode/opencode.json" = "opencode.jsonc"
 
 [tasks.link]
 description = "Apply dotfile symlinks"
