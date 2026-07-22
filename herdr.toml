@@ -1,13 +1,19 @@
 onboarding = false
+
 [keys]
 prefix = "ctrl+a"
-goto = "ctrl+b"
 
 [[keys.command]]
 key = "prefix+m"
 type = "plugin_action"
 command = "spotify-now-playing.open"
 description = "Spotify now playing"
+
+[[keys.command]]
+key = "prefix+f"
+type = "plugin_action"
+command = "sessionizer.pick"
+description = "Open sessionizer"
 
 [theme]
 name = "catppuccin-latte"
