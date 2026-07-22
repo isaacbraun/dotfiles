@@ -1,0 +1,4 @@
+appearance = "system"
+theme_light = "catppuccin-latte"
+theme_dark = "gruvbox-dark"
+comment_vim = true
