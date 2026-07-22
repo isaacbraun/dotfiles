@@ -70,6 +70,10 @@ description = "Run herdr setup"
 run = [
   "herdr integration install opencode",
   "herdr integration install copilot",
+  "herdr plugin install aarsh21/herdr-tab-title -y",
+  "herdr plugin action invoke aarsh21.tab-title.start",
+  "herdr plugin install salkhalil/herdr-sessionizer -y",
+  "herdr plugin install iikjl/herdr-spotify -y",
   "npx skills add ogulcancelik/herdr --skill herdr -g",
 ]
 
