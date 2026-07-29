@@ -1,0 +1,274 @@
+{
+  "info": {
+    "id": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+    "slug": "hidden-pixel",
+    "projectID": "3bdc89e0a69a96bfa3ef96d9b8d450a1119d112c",
+    "directory": "/Users/isaac/bauen/dotfiles",
+    "path": "",
+    "title": "hello-entire.md note for first Entire checkpoint demo",
+    "agent": "build",
+    "model": {
+      "id": "gpt-5.6-sol",
+      "providerID": "github-copilot"
+    },
+    "version": "1.18.9",
+    "summary": {
+      "additions": 0,
+      "deletions": 0,
+      "files": 0
+    },
+    "cost": 0.011072499999999999,
+    "tokens": {
+      "input": 6,
+      "output": 80,
+      "reasoning": 0,
+      "cache": {
+        "read": 17285,
+        "write": 0
+      }
+    },
+    "time": {
+      "created": 1785301472487,
+      "updated": 1785301477558
+    }
+  },
+  "messages": [
+    {
+      "info": {
+        "role": "user",
+        "time": {
+          "created": 1785301472496
+        },
+        "agent": "build",
+        "model": {
+          "providerID": "github-copilot",
+          "modelID": "gpt-5.6-sol"
+        },
+        "summary": {
+          "diffs": [
+            {
+              "file": "hello-entire.md",
+              "patch": "Index: hello-entire.md\n===================================================================\n--- hello-entire.md\t\n+++ hello-entire.md\t\n@@ -0,0 +1,1 @@\n+This repo is my first Entire checkpoint demo.\n",
+              "additions": 1,
+              "deletions": 0,
+              "status": "added"
+            }
+          ]
+        },
+        "id": "msg_fac4294f0001Zbpvzx6iXjZZKy",
+        "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB"
+      },
+      "parts": [
+        {
+          "type": "text",
+          "text": "Create a file named hello-entire.md with a short note explaining that this repo is my first Entire checkpoint demo.",
+          "id": "prt_fac4294f1001AWcmZK4CygPU1s",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac4294f0001Zbpvzx6iXjZZKy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_fac4294f0001Zbpvzx6iXjZZKy",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/isaac/bauen/dotfiles",
+          "root": "/Users/isaac/bauen/dotfiles"
+        },
+        "cost": 0.0062345,
+        "tokens": {
+          "total": 8666,
+          "input": 3,
+          "output": 64,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 8599
+          }
+        },
+        "modelID": "gpt-5.6-sol",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1785301472848,
+          "completed": 1785301477556
+        },
+        "finish": "tool-calls",
+        "id": "msg_fac429650001rI4D5no0rDMFeo",
+        "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB"
+      },
+      "parts": [
+        {
+          "snapshot": "974e4e85bee9390927f3a05850df6c548522b17f",
+          "type": "step-start",
+          "id": "prt_fac42a710001X6nQxDtrJd66SJ",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac429650001rI4D5no0rDMFeo"
+        },
+        {
+          "type": "text",
+          "text": "I’ll add the requested Markdown note at the repository root.",
+          "time": {
+            "start": 1785301477214,
+            "end": 1785301477222
+          },
+          "metadata": {
+            "copilot": {
+              "itemId": "o8thbplDd7yakHnbQ12XWHhbpx/slI9oKWtTB9iRdhHGcZww+T3nxDNSzK+E6vjmJ4kQpotPVyvsEK1xXQJ3OcBbPMi+1gc8ssbgin8en+wlgi5eX4T8zS+uc11EdDHCjG2lQ76LZwog2N5w4PoHKgScHQxZXN4bmfEeZrGVJ3nmAAKMbZZWKHuu0V8oSduWrIsTFrcnh2F4FESEVbqIDMRV52KDMfxhv/Z3ar1iA7JfBVQoKThcsU2p+UFvG5X6gBN5VqWPpV6Yk70Wre9akvGNNXn0ETXdH8Gx1EJiRRFiMYCs24fKacWYnUsesztB7ceMZvi5oDPZ7EYMf1uNLa7fAtLz3Nvmi7kKgilBpCejGIe6LmDmRKy0/ddglmtXEnla7ia7ZP42mkRX58b4nQu8VOxi"
+            }
+          },
+          "id": "prt_fac42a75e001M9pcgOlw6Cv27z",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac429650001rI4D5no0rDMFeo"
+        },
+        {
+          "type": "tool",
+          "tool": "apply_patch",
+          "callID": "call_RgAIZtPyg1xBSNjadtyBDIWg",
+          "state": {
+            "status": "completed",
+            "input": {
+              "patchText": "*** Begin Patch\n*** Add File: hello-entire.md\n+This repo is my first Entire checkpoint demo.\n*** End Patch"
+            },
+            "output": "Success. Updated the following files:\nA hello-entire.md",
+            "metadata": {
+              "diff": "Index: /Users/isaac/bauen/dotfiles/hello-entire.md\n===================================================================\n--- /Users/isaac/bauen/dotfiles/hello-entire.md\n+++ /Users/isaac/bauen/dotfiles/hello-entire.md\n@@ -0,0 +1,1 @@\n+This repo is my first Entire checkpoint demo.\n\n",
+              "files": [
+                {
+                  "filePath": "/Users/isaac/bauen/dotfiles/hello-entire.md",
+                  "relativePath": "hello-entire.md",
+                  "type": "add",
+                  "patch": "Index: /Users/isaac/bauen/dotfiles/hello-entire.md\n===================================================================\n--- /Users/isaac/bauen/dotfiles/hello-entire.md\n+++ /Users/isaac/bauen/dotfiles/hello-entire.md\n@@ -0,0 +1,1 @@\n+This repo is my first Entire checkpoint demo.\n",
+                  "additions": 1,
+                  "deletions": 0
+                }
+              ],
+              "diagnostics": {},
+              "truncated": false
+            },
+            "title": "Success. Updated the following files:\nA hello-entire.md",
+            "time": {
+              "start": 1785301477442,
+              "end": 1785301477446
+            }
+          },
+          "metadata": {
+            "copilot": {
+              "itemId": "/6FBvdBGq3Vyg4Xe3dUf6CHFzGpJc0s2IMF7TyKA6VnLmJiVJEdVJ0fdZswvKOibefdif91dSea4dFLpBA/KAcJyb2pAw1KOZuiLMwLIB+vZBIhrnmAIuYNsGjvczPHaKDdssaRnZ6xJGh5SEDey1DKl88+G+sv4y5eKy7zHGPhChslf1D4RKAmb9vuVYhym93jpchH1ke3jmsh2QHljkxQT6AntZFQEgnqwzrGthSFipBBUO5OofLJ+oC4x8OkifHh1G32IITv4N12nYsd6VzZPpZkz6tZTa0CqPQtIluqWubwW7VH0Mc8JeAvxDgrmbRXitjf3jYvGG8DRDWa/RrIbzHWvvCIDIhG3YPQRrMTTt8G9pLz3Swyc/LAP9XmvWFmb4YLBkmmXgkebAbGsqY1PtD8="
+            }
+          },
+          "id": "prt_fac42a76a001P9Dy3aR4xk3Ndx",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac429650001rI4D5no0rDMFeo"
+        },
+        {
+          "reason": "tool-calls",
+          "snapshot": "e47093063ff1826c0fb99bcdab431abe791a7a50",
+          "type": "step-finish",
+          "tokens": {
+            "total": 8666,
+            "input": 3,
+            "output": 64,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 8599
+            }
+          },
+          "cost": 0.0062345,
+          "id": "prt_fac42a88b001Ss33xLfUFNcxT1",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac429650001rI4D5no0rDMFeo"
+        },
+        {
+          "type": "patch",
+          "hash": "974e4e85bee9390927f3a05850df6c548522b17f",
+          "files": [
+            "/Users/isaac/bauen/dotfiles/hello-entire.md"
+          ],
+          "id": "prt_fac42a8b3001yJrLMN1TgsOigq",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac429650001rI4D5no0rDMFeo"
+        }
+      ]
+    },
+    {
+      "info": {
+        "parentID": "msg_fac4294f0001Zbpvzx6iXjZZKy",
+        "role": "assistant",
+        "mode": "build",
+        "agent": "build",
+        "path": {
+          "cwd": "/Users/isaac/bauen/dotfiles",
+          "root": "/Users/isaac/bauen/dotfiles"
+        },
+        "cost": 0.004838,
+        "tokens": {
+          "total": 8705,
+          "input": 3,
+          "output": 16,
+          "reasoning": 0,
+          "cache": {
+            "write": 0,
+            "read": 8686
+          }
+        },
+        "modelID": "gpt-5.6-sol",
+        "providerID": "github-copilot",
+        "time": {
+          "created": 1785301477558,
+          "completed": 1785301479243
+        },
+        "finish": "stop",
+        "id": "msg_fac42a8b6001A3TMMPqrOiRatN",
+        "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB"
+      },
+      "parts": [
+        {
+          "snapshot": "e47093063ff1826c0fb99bcdab431abe791a7a50",
+          "type": "step-start",
+          "id": "prt_fac42ae5b001CJ9rwl6bTXwRll",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac42a8b6001A3TMMPqrOiRatN"
+        },
+        {
+          "type": "text",
+          "text": "Created `hello-entire.md` with the requested note.",
+          "time": {
+            "start": 1785301479076,
+            "end": 1785301479127
+          },
+          "metadata": {
+            "copilot": {
+              "itemId": "OiZGrp/uzCRrCT4mhoQ+Pp33PUAAm80aFFMeyHgQe6V1qtUe8rN6X41gFMsO/kCY5xS5MIpYjwx9YVsGMd52mRqEdbQFNfsHziYP5RUnTnmerW2UtHuf/SWNKkiwg62GwhA64vxQYfS8LKyZWY/LUrzbesqmJ1anCYQEhO7ss8iE/zv14/CUB2YUaKCUaw/o3Mo++kRbf6KwARy/pCFwzg6djy/DpVj4K3zfZMZmnocQxDuW9UGwaWnR4BUtSfOebuBoNVC8bB7uJ2yGagLLkL87W2R4CLn5RefWs8I8ouO5OB7Xjxg/m/M9KsvKEYMs+KsaVbJrwaUM3F6ndnpYMKdUi6aWK2KqBcDHeBDv1dtiXL4geGJALOt3LiVAnkWRFwiZXfMh1p33vFfWG1jwmT/KjfKw"
+            }
+          },
+          "id": "prt_fac42aea4001EF92WqQcvgophI",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac42a8b6001A3TMMPqrOiRatN"
+        },
+        {
+          "reason": "stop",
+          "snapshot": "e47093063ff1826c0fb99bcdab431abe791a7a50",
+          "type": "step-finish",
+          "tokens": {
+            "total": 8705,
+            "input": 3,
+            "output": 16,
+            "reasoning": 0,
+            "cache": {
+              "write": 0,
+              "read": 8686
+            }
+          },
+          "cost": 0.004838,
+          "id": "prt_fac42af25001MKYUy6jXKRj2yj",
+          "sessionID": "ses_053bd6b18ffeRsHsj0wQHREaGB",
+          "messageID": "msg_fac42a8b6001A3TMMPqrOiRatN"
+        }
+      ]
+    }
+  ]
+}
