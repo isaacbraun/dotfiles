@@ -5,6 +5,7 @@ idiomatic_version_file_enable_tools = ["pnpm"]
 
 [tools]
 bat = "latest"
+entire = "latest"
 eza = "latest"
 fd = "latest"
 fzf = "latest"
