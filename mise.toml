@@ -1,7 +1,7 @@
 [settings]
 experimental = true
 dotfiles.default_mode = "symlink"
-idiomatic_version_file_enable_tools = ["pnpm"]
+idiomatic_version_file_enable_tools = ["pnpm", "node"]
 
 [tools]
 bat = "latest"
