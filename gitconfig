@@ -48,7 +48,7 @@
   default = "!git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"
   # Prune remote-merged branches (gh poi), delete local merged branches and their worktrees,
   # then delete stranded local branches (ancestors of default with no upstream, no worktree).
-  bclean = "!git gone | xargs -r git branch -D"
+  bclean = "!git fetch && git gone | xargs -r git branch -D"
   # Switches to specified branch (or the default branch if no branch is specified), runs git up, then runs bclean.
   bdone = "!f() { DEFAULT=$(git default); git checkout ${1-$DEFAULT} && git pull && git bclean; }; f"
   gone = "!git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads/ | awk '$2 == \"[gone]\" { print $1 }'"
