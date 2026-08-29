@@ -422,14 +422,6 @@ if type fzf &> /dev/null && type rg &> /dev/null; then
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-# pnpm
-# export PNPM_HOME="/home/isaac/.local/share/pnpm"
-# case ":$PATH:" in
-#   *":$PNPM_HOME:"*) ;;
-#   *) export PATH="$PNPM_HOME:$PATH" ;;
-# esac
-# pnpm end
-
 # bun completions
 [ -s "/home/isaac/.bun/_bun" ] && source "/home/isaac/.bun/_bun"
 
@@ -478,3 +470,11 @@ eval "$(zoxide init --cmd cd zsh)"
 # opencode
 alias oc="opencode"
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/isaac/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
