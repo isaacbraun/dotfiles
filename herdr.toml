@@ -19,7 +19,7 @@ description = "Open sessionizer"
 name = "catppuccin-latte"
 auto_switch = true
 light_name = "catppuccin-latte"
-dark_name = "gruvbox-dark-hard"
+dark_name = "gruvbox"
 
 [ui]
 prompt_new_tab_name = false
