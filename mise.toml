@@ -63,6 +63,7 @@ description = "Install skills"
 run = [
   "npx skills add mattpocock/skills -g",
   "npx skills add ogulcancelik/herdr --skill herdr -g",
+  "npx skills add dmmulroy/anti-slop -g",
 ]
 
 [tasks.obsidian]
