@@ -93,6 +93,7 @@ run = [
 
 [bootstrap.packages]
 "brew:tree-sitter-cli" = "latest"
+"brew:terminal-notifier" = "latest"
 
 [bootstrap.hooks.final]
 run = [

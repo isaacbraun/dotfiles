@@ -52,7 +52,7 @@ TODO: update this list to be accurate and have more context.
 - [Apfel](https://apfel.franzai.com): only macOS
 
 ## GitHub Desktop Notifications (cron) - macOS Only Currently
-- Install the `gh-notify-desktop` extension and verify it works: `gh extension install benelan/gh-notify-desktop`
+- Install the [`gh-notify-desktop`](https://github.com/benelan/gh-notify-desktop) extension and verify it works: `gh extension install benelan/gh-notify-desktop`
 - Configure environment variables:
   - Copy `scripts/.env.template` to `scripts/.env`
   - Set `GH_TOKEN` and any required vars inside `scripts/.env`
