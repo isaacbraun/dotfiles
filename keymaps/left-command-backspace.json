@@ -1,0 +1,20 @@
+{
+    "manipulators": [
+        {
+            "description": "Tap Left Command for Backspace; hold for Command",
+            "from": {
+                "key_code": "left_command",
+                "modifiers": { "optional": ["any"] }
+            },
+            "parameters": { "basic.to_if_alone_timeout_milliseconds": 200 },
+            "to": [
+                {
+                    "key_code": "left_command",
+                    "lazy": true
+                }
+            ],
+            "to_if_alone": [{ "key_code": "delete_or_backspace" }],
+            "type": "basic"
+        }
+    ]
+}

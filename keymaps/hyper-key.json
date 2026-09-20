@@ -1,7 +1,7 @@
 {
     "manipulators": [
         {
-            "description": "Change caps_lock to command+control+option+shift.",
+            "description": "Set Capslock to Hyperkey",
             "from": {
                 "key_code": "caps_lock",
                 "modifiers": { "optional": ["any"] }
