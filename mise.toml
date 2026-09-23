@@ -53,6 +53,7 @@ zoxide = "latest"
 
 [tasks.link]
 description = "Apply dotfile symlinks"
+dir = "{{ cwd }}"
 run = "mise dotfiles apply --yes"
 
 [tasks.scripts]
