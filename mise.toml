@@ -30,6 +30,7 @@ zoxide = "latest"
 "~/.config/nvim" = { url = "git@github.com:isaacbraun/nvim.git" }
 
 [dotfiles]
+"~/.agents/skills/unslop" = "skills/unslop"
 "~/.gitconfig" = "gitconfig"
 "~/.githelpers" = "githelpers"
 "~/.gitignore" = "gitignore"
@@ -63,7 +64,6 @@ description = "Install skills"
 run = [
   "npx skills add mattpocock/skills -g",
   "npx skills add ogulcancelik/herdr --skill herdr -g",
-  "npx skills add dmmulroy/anti-slop -g",
 ]
 
 [tasks.obsidian]
