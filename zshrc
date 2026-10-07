@@ -329,6 +329,9 @@ if type bat &> /dev/null; then
   alias cat='bat'
 fi
 
+# Open file in Obsidian
+alias oo='obsidian command id=workspace:new-tab && open -a Obsidian'
+
 ##########
 # FUNCTIONS
 ##########
