@@ -16,9 +16,8 @@ command = "sessionizer.pick"
 description = "Open sessionizer"
 
 [theme]
-name = "catppuccin-latte"
-auto_switch = true
-light_name = "catppuccin-latte"
+auto_switch = true 
+light_name = "rose-pine-dawn"
 dark_name = "gruvbox"
 
 [ui]

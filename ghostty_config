@@ -14,6 +14,8 @@ window-decoration = false
 link-url = true
 term = xterm-256color
 window-colorspace = display-p3
-# Material, Light Owl, Catppuccin Latte, Dayfox, Raycast Light / Dark
-theme = light:Catppuccin Latte,dark:Gruvbox Dark Hard
+# Material, Light Owl, Catppuccin Latte, Dayfox
+# Dawnfox - Flexoki Light - Gruvbox Light / Hard - Monokai Pro Light - Rose Pine Dawn
+theme = light:Rose Pine Dawn,dark:Gruvbox Dark Hard
+background-opacity = 0.9
 adjust-cell-width = -4%
