@@ -448,6 +448,9 @@ export PATH="/usr/local/go/bin/go/:$PATH"
 # Export my personal ~/bin as last one to have highest precedence
 export PATH="$HOME/bin:$PATH"
 
+## Mise Activate
+eval "$(mise activate zsh)"
+
 # Neovim as default editor if available, otherwise fallback to vim
 if type nvim &> /dev/null; then
   alias vim="nvim"
@@ -459,9 +462,6 @@ else
   export PSQL_EDITOR='vim -c"set filetype=sql"'
   export GIT_EDITOR='vim'
 fi
-
-## Mise Activate
-eval "$(mise activate zsh)"
 
 # Zoxide init
 eval "$(zoxide init --cmd cd zsh)"
