@@ -17,6 +17,11 @@ else
   export EDITOR='nvim'
 fi
 
+# Load SSH keys from the Apple keychain on macOS
+if [[ "$OSTYPE" == darwin* ]]; then
+  /usr/bin/ssh-add --apple-load-keychain
+fi
+
 ##########
 # HISTORY
 ##########
