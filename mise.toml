@@ -3,8 +3,12 @@ experimental = true
 dotfiles.default_mode = "symlink"
 idiomatic_version_file_enable_tools = ["pnpm", "node"]
 
+[settings.upgrade]
+auto_prune = false
+
 [tools]
 bat = "latest"
+codex = "latest"
 entire = "latest"
 eza = "latest"
 fd = "latest"
@@ -15,15 +19,15 @@ herdr = "latest"
 lazygit = "latest"
 neovim = "latest"
 node = "latest"
+opencode = "latest"
 pnpm = "latest"
 python = "3"
 ripgrep = "latest"
 rust = "latest"
 zoxide = "latest"
-
-## Need to add and setup GitHub CLI etc.
-# gh = "latest"
-# git-delta = "latest"
+delta = "latest"
+gh = "latest"
+claude-code = "latest"
 # git-lfs = "latest"
 
 [bootstrap.repos]
