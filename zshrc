@@ -443,12 +443,12 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add Mason bin to path
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
-# Brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-# Add homewbrew/bin to path
-export PATH="$HOME/homebrew/bin:$PATH"
-# Add Go
-export PATH="/usr/local/go/bin/go/:$PATH"
+if [[ "$OSTYPE" == darwin* ]]; then
+  # Homebrew and Go paths used on macOS.
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  export PATH="$HOME/homebrew/bin:$PATH"
+  export PATH="/usr/local/go/bin/go/:$PATH"
+fi
 
 # Export my personal ~/bin as last one to have highest precedence
 export PATH="$HOME/bin:$PATH"
@@ -479,10 +479,16 @@ eval "$(zoxide init --cmd cd zsh)"
 alias oc="opencode"
 export PATH="$HOME/.opencode/bin:$PATH"
 
-# pnpm
-export PNPM_HOME="/Users/isaac/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-# pnpm end
+if [[ "$OSTYPE" == darwin* ]]; then
+  # pnpm's macOS global installation path.
+  export PNPM_HOME="/Users/isaac/Library/pnpm"
+  case ":$PATH:" in
+    *":$PNPM_HOME/bin:"*) ;;
+    *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+  esac
+fi
+
+# Unlock the persistent SSH agent used by T3 without changing the shell environment.
+if [[ "$OSTYPE" == linux* ]]; then
+  alias ssh-unlock='SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket" ssh-add ~/.ssh/id_signing_ed25519'
+fi
