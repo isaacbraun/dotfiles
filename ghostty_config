@@ -13,6 +13,7 @@ window-decoration = false
 # link = true - cannot currently be set
 link-url = true
 term = xterm-256color
+command = /usr/bin/zsh
 window-colorspace = display-p3
 # Material, Light Owl, Catppuccin Latte, Dayfox
 # Dawnfox - Flexoki Light - Gruvbox Light / Hard - Monokai Pro Light - Rose Pine Dawn
