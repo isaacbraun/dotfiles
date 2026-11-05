@@ -8,15 +8,12 @@ auto_prune = false
 
 [tools]
 bat = "latest"
-codex = "latest"
 entire = "latest"
 eza = "latest"
 fd = "latest"
 fzf = "latest"
 "github:agavra/tuicr" = "latest"
 go = "latest"
-herdr = "latest"
-lazygit = "latest"
 neovim = "latest"
 node = "latest"
 opencode = "latest"
@@ -68,7 +65,6 @@ run = "chmod +x scripts/*"
 description = "Install skills"
 run = [
   "npx skills add mattpocock/skills -g",
-  "npx skills add ogulcancelik/herdr --skill herdr -g",
 ]
 
 [tasks.obsidian]
@@ -84,18 +80,6 @@ else
 fi
 '''
 
-[tasks.herdr]
-description = "Run herdr setup"
-run = [
-  "herdr integration install opencode",
-  "herdr integration install copilot",
-  "herdr plugin install aarsh21/herdr-tab-title -y",
-  "herdr plugin action invoke aarsh21.tab-title.start",
-  "herdr plugin install salkhalil/herdr-sessionizer -y",
-  "herdr plugin install iikjl/herdr-spotify -y",
-  "herdr plugin install tomasvarga/herdr-pickr -y",
-]
-
 [bootstrap.packages]
 "brew:tree-sitter-cli" = "latest"
 "brew:terminal-notifier" = "latest"
@@ -105,5 +89,4 @@ run = [
   "mise run scripts",
   "mise run skills",
   "mise run obsidian",
-  "mise run herdr",
 ]
