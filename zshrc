@@ -145,6 +145,7 @@ alias gc='git commit'
 alias gca='git add -A && git commit'
 alias gcm='git commit -m'
 alias gd='git diff'
+alias gr='git rebase'
 alias gdc='git diff --cached'
 alias sw='git switch'
 # [s]witch and [c]reate branch
