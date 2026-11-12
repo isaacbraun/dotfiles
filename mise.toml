@@ -32,6 +32,10 @@ claude-code = "latest"
 
 [dotfiles]
 "~/.agents/skills/unslop" = "skills/unslop"
+"~/.copilot/copilot-instructions.md" = "agent-instructions.md"
+"~/.claude/CLAUDE.md" = "agent-instructions.md"
+"~/.codex/AGENTS.md" = "agent-instructions.md"
+"~/.config/opencode/AGENTS.md" = "agent-instructions.md"
 "~/.gitconfig" = "gitconfig"
 "~/.githelpers" = "githelpers"
 "~/.gitignore" = "gitignore"

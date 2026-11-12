@@ -28,6 +28,18 @@ mise bootstrap --dry-run
 mise dotfiles status
 ```
 
+### Shared agent instructions
+
+Edit `agent-instructions.md` to change the shared writing instructions for
+Copilot, Claude Code, Codex, and OpenCode. Mise links this file to each agent's global instructions location:
+
+- Copilot: `~/.copilot/copilot-instructions.md`
+- Claude Code: `~/.claude/CLAUDE.md`
+- Codex: `~/.codex/AGENTS.md`
+- OpenCode: `~/.config/opencode/AGENTS.md`
+
+Run `mise run link` to apply the symlinks. Restart agent sessions to load changes.
+
 ### Manual tasks:
 
 ```sh
