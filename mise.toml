@@ -25,6 +25,7 @@ zoxide = "latest"
 delta = "latest"
 gh = "latest"
 claude-code = "latest"
+codex = "latest"
 # git-lfs = "latest"
 
 [bootstrap.repos]
